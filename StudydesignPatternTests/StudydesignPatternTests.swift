@@ -12,9 +12,9 @@
 //import RxTest
 //import RxCocoa
 //import RxOptional
-//@testable import StudydesignPattern
+//@testable import StudyDesignPattern
 
-//class StudydesignPatternTests: QuickSpec {
+//class StudyDesignPatternTests: QuickSpec {
 //    override func spec() {
 //        var service: AppService!
 //        var reactor: SearchListViewModel!

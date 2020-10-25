@@ -1,6 +1,6 @@
 //
 //  MVVMViewController.swift
-//  StudydesignPattern
+//  StudyDesignPattern
 //
 //  Created by Mephrine on 2020/10/25.
 //
