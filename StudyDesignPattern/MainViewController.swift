@@ -9,6 +9,7 @@ import UIKit
 import RxFlow
 
 final class MainViewController: UITableViewController {
+  
     enum DesignPattern: String {
         case reactorkit = "ReactorKit"
         case cleanarticture = "CleanArticture"
@@ -19,13 +20,14 @@ final class MainViewController: UITableViewController {
         case mvc = "MVC"
         
         func viewController() -> UIViewController? {
+          let services: AppService = {
+            let searchService = SearchService()
+            let nonRxSearchService = NonRxSearchService()
+            return AppService(searchService: searchService, nonRxSearchService: nonRxSearchService)
+          }()
+          
             switch self {
             case .reactorkit:
-                let services: AppService = {
-                    let searchService = SearchService()
-                    return AppService(searchService: searchService)
-                }()
-                
                 var applicationWindow: UIWindow? {
                     return (UIApplication.shared.delegate?.window?.flatMap { $0 })
                 }
@@ -48,7 +50,7 @@ final class MainViewController: UITableViewController {
             case .mvp: return MVPViewController()
             case .ribs: return RIBsViewController()
             case .mvvm: return MVVMViewController()
-            case .mvc: return MVCViewController()
+            case .mvc: return MVCListViewController(service: services)
             }
         }
     }
