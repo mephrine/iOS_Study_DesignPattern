@@ -8,22 +8,25 @@
 import UIKit
 
 
-
-fileprivate extension UILabel {
-    var defaultSetting: UILabel {
-        self.contentMode = .scaleAspectFit
-        self.font = Font(.Medium, size: 17)
-        return self
-    }
-}
-
 //public protocol DetailNavigationAction: AnyObject {
 //    func clickToBackButton()
 //}
 
+fileprivate struct Font {
+  static let defaultSettingLabelTitle = UIFont.systemFont(ofSize: 17)
+}
+
+fileprivate extension UILabel {
+    var defaultSetting: UILabel {
+        self.contentMode = .scaleAspectFit
+      self.font = Font.defaultSettingLabelTitle
+        return self
+    }
+}
+
 class BaseDetailViewController: BaseViewController {
     // MARK: - Variable
-    let thumnail = UIImageView(frame: .zero).then {
+    let thumnailView = UIImageView(frame: .zero).then {
         $0.contentMode = .scaleAspectFit
     }
     let nameLabel = UILabel(frame: .zero).then {
@@ -76,7 +79,7 @@ class BaseDetailViewController: BaseViewController {
         
         // ScrollView
         scrollView.addSubview(contentView)
-        contentView.addSubview(thumnail)
+        contentView.addSubview(thumnailView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(titleLabel)
         contentView.addSubview(contentsLabel)
@@ -94,17 +97,17 @@ class BaseDetailViewController: BaseViewController {
             $0.height.equalToSuperview().priority(250)
         }
         
-        thumnail.snp.makeConstraints {
+      thumnailView.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.4)
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(40)
-            $0.height.equalTo(thumnail.snp.width)
+            $0.height.equalTo(thumnailView.snp.width)
         }
         
         nameLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().inset(20)
-            $0.top.equalTo(thumnail.snp.bottom).offset(40)
+            $0.top.equalTo(thumnailView.snp.bottom).offset(40)
         }
         
         titleLabel.snp.makeConstraints {

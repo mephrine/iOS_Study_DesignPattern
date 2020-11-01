@@ -22,8 +22,7 @@ final class ReactorKitListReactor: Reactor, Stepper {
     lazy var steps = PublishRelay<Step>()
 
     // Service
-    typealias Services = HasSearchService
-    var service: Services
+    var service: HasSearchService
 
     // e.g.
     var isLoading = PublishSubject<Bool>()         // 로딩바 관리

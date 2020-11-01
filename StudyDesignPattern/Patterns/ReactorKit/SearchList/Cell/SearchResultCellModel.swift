@@ -29,6 +29,10 @@ extension SearchTableViewSection: SectionModelType {
 - Note: 검색 결과 정보를 보여주는 Cell의 Model
 */
 struct SearchResultCellModel {
+  
+  fileprivate struct Font {
+    static let titleLabelTitle = UIFont.systemFont(ofSize: 15)
+  }
     let model: SearchItem
     
     var thumbnailURL: URL? {
@@ -55,7 +59,7 @@ struct SearchResultCellModel {
     }
     
     var title: NSAttributedString? {
-        return model.title?.htmlAttributedString(font: Font(.Regular, size: 15))
+      return model.title?.htmlAttributedString(font: Font.titleLabelTitle)
     }
     
     var dateTime: String {

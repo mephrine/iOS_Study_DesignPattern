@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 
-struct SearchResult: ALSwiftyJSONAble {
+struct SearchResult: ALSwiftyJSONAble, Decodable {
     let isEnd: Bool?
     let pageCount: Int?
     let totalCount: Int?
@@ -22,7 +22,7 @@ struct SearchResult: ALSwiftyJSONAble {
     }
 }
 
-struct SearchItem: ALSwiftyJSONAble {
+struct SearchItem: ALSwiftyJSONAble, Decodable {
     var name: String? = ""
     var type: String? = ""
     var isReading: Bool = false

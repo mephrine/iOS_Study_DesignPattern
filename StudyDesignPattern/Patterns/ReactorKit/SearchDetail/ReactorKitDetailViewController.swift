@@ -46,7 +46,7 @@ final class ReactorKitDetailViewController: BaseDetailViewController, View {
         reactor.state.map{ $0.thumbnailURL }
             .filterNil()
             .subscribe(onNext: { [weak self] in
-                self?.thumnail.kf.setImage(with: $0, placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.3))])
+                self?.thumnailView.kf.setImage(with: $0, placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.3))])
             }).disposed(by: disposeBag)
 
         reactor.state.map{ $0.name }

@@ -30,16 +30,24 @@ extension HistoryTableViewSection: SectionModelType {
 - Note: 검색 히스토리를 보여주는 Cell
 */
 final class SearchHistoryCell: UITableViewCell, Reusable {
+  fileprivate struct Font {
+    static let historyLabelTitle = UIFont.systemFont(ofSize: 14)
+  }
+  
+  fileprivate struct Color {
+    static let lineBgColor = UIColor(hex: 0x666666)
+  }
+  
     private lazy var historyLabel = UILabel(frame: .zero).then {
         $0.backgroundColor = .clear
         $0.textColor = .black
-        $0.font = Font(.Regular, size: 14)
+      $0.font = Font.historyLabelTitle
         $0.numberOfLines = 0
         $0.textAlignment = .left
     }
     
     private let lineView = UIView(frame: .zero).then {
-        $0.backgroundColor = UIColor(hex: 0x666666)
+      $0.backgroundColor = Color.lineBgColor
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -61,14 +61,42 @@ enum SearchSort: String {
     }
 }
 
-//public protocol SelectSortProtocol: AnyObject {
-//    func selectActionSort(selected: SearchSort?)
-//}
+protocol SelectSortProtocol: AnyObject {
+    func selectActionSort(selected: SearchSort)
+    func selectFilter(selected: SearchFilter)
+}
 
-class BaseListViewController: BaseViewController {
+
+
+
+
+class BaseListViewController: BaseViewController, SelectSortProtocol {
     // Gesture
     lazy var touchSuperViewGesture = TouchDownGestureRecognizer(target: self, action: #selector(hideFilterView))
+  
+  fileprivate struct Metric {
+    static var filterButtonHorizontalEdge: CGFloat = 20.0
+    static var filterStackViewVeritcalEdge: CGFloat = 5.0
+    static var filterStackViewHorizontalEdge: CGFloat = 15.0
     
+    static var searchButtonEdge: CGFloat = 10.0
+    
+    static var historyVerticalEdge: CGFloat = 5.0
+    
+    static var sortButtonEdge: CGFloat = 10
+  }
+  
+  fileprivate struct Font {
+    static let buttonTitle = UIFont.boldSystemFont(ofSize: 18)
+    static let noDataTitle = UIFont.boldSystemFont(ofSize: 15)
+  }
+    
+  fileprivate struct Color {
+    static let bgColor = UIColor(hex: 0x666666)
+    static let searchBgColor = UIColor(hex: 0x86a4e7)
+    static let historyBgColor = UIColor(hex: 0x000000, alpha: 0.7)
+  }
+  
     // MARK: - View
     // searchBar
     let searchBar = UISearchBar(frame: .zero).then {
@@ -83,17 +111,17 @@ class BaseListViewController: BaseViewController {
     }
     
     let searchButton = UIButton(frame: .zero).then {
-        $0.backgroundColor = UIColor(hex: 0x86a4e7)
+      $0.backgroundColor = Color.searchBgColor
         $0.setTitleColor(.white, for: .normal)
-        $0.titleLabel?.font = Font(.Bold, size: 18)
+      $0.titleLabel?.font = Font.buttonTitle
         $0.setTitle("STR_SEARCH_BUTTON".localized, for: .normal)
-        $0.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+      $0.contentEdgeInsets = UIEdgeInsets(top: Metric.searchButtonEdge, left: Metric.searchButtonEdge, bottom: Metric.searchButtonEdge, right: Metric.searchButtonEdge)
     }
     
     // history
     lazy var historyTableView = UITableView(frame: .zero, style: .plain).then {
         $0.register(cellType: SearchHistoryCell.self)
-        $0.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
+      $0.contentInset = UIEdgeInsets(top: Metric.historyVerticalEdge, left: 0, bottom: Metric.historyVerticalEdge, right: 0)
         $0.rowHeight = 40
         $0.separatorStyle = .none
         $0.backgroundColor = .white
@@ -103,7 +131,7 @@ class BaseListViewController: BaseViewController {
     }
     
     lazy var historyView = UIView(frame: .zero).then {
-        $0.backgroundColor = UIColor(hex: 0x000000, alpha: 0.7)
+      $0.backgroundColor = Color.historyBgColor
     }
     
     // headerView
@@ -115,46 +143,53 @@ class BaseListViewController: BaseViewController {
         $0.backgroundColor = .white
         $0.setTitleColor(.black, for: .normal)
         $0.contentHorizontalAlignment = .left
-        $0.titleLabel?.font = Font(.Bold, size: 18)
+      $0.titleLabel?.font = Font.buttonTitle
         $0.setTitle(SearchFilter.all.desc, for: .normal)
-        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+      $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: Metric.filterButtonHorizontalEdge, bottom: 0, right: Metric.filterButtonHorizontalEdge)
     }
     
     // filter view
-    let filterStackView = UIStackView(frame: .zero).then {
+    lazy var filterStackView = UIStackView(frame: .zero).then {
         $0.axis = .vertical
         $0.alignment = .fill
         $0.distribution = .fill
         $0.spacing = 0
         $0.backgroundColor = .white
-        $0.layoutMargins = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
+      $0.layoutMargins = UIEdgeInsets(top: Metric.filterStackViewVeritcalEdge, left: Metric.filterStackViewHorizontalEdge, bottom: Metric.filterStackViewVeritcalEdge, right: Metric.filterStackViewHorizontalEdge)
+        
+        let lineView = UIView(frame: .zero).then {
+          $0.backgroundColor = Color.bgColor
+        }
+        
+        let lineView2 = UIView(frame: .zero).then {
+            $0.backgroundColor = Color.bgColor
+        }
         
         let filterButton1 = UIButton(frame: .zero).then {
             $0.backgroundColor = .white
             $0.setTitleColor(.black, for: .normal)
             $0.contentHorizontalAlignment = .left
-            $0.titleLabel?.font = Font(.Bold, size: 18)
+          $0.titleLabel?.font = Font.buttonTitle
             $0.setTitle(SearchFilter.blog.desc, for: .normal)
-            $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+          $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: Metric.filterButtonHorizontalEdge, bottom: 0, right: Metric.filterButtonHorizontalEdge)
             $0.tag = 901
+            
+            let tapFilterGesture = UITapGestureRecognizer(target: self, action: #selector(selectFilterView(_:)))
+            
+            $0.addGestureRecognizer(tapFilterGesture)
         }
         
         let filterButton2 = UIButton(frame: .zero).then {
             $0.backgroundColor = .white
             $0.setTitleColor(.black, for: .normal)
             $0.contentHorizontalAlignment = .left
-            $0.titleLabel?.font = Font(.Bold, size: 18)
+          $0.titleLabel?.font = Font.buttonTitle
             $0.setTitle(SearchFilter.cafe.desc, for: .normal)
-            $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: Metric.filterButtonHorizontalEdge, bottom: 0, right: Metric.filterButtonHorizontalEdge)
             $0.tag = 902
-        }
-        
-        let lineView = UIView(frame: .zero).then {
-            $0.backgroundColor = UIColor(hex: 0x666666)
-        }
-        
-        let lineView2 = UIView(frame: .zero).then {
-            $0.backgroundColor = UIColor(hex: 0x666666)
+            
+            let tapFilterGesture = UITapGestureRecognizer(target: self, action: #selector(selectFilterView(_:)))
+            $0.addGestureRecognizer(tapFilterGesture)
         }
         
         lineView.snp.makeConstraints {
@@ -183,7 +218,7 @@ class BaseListViewController: BaseViewController {
     let sortButton = UIButton(frame: .zero).then {
         $0.backgroundColor = .clear
         $0.setImage(UIImage(named: "icon_search_filter"), for: .normal)
-        $0.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+      $0.contentEdgeInsets = UIEdgeInsets(top: Metric.sortButtonEdge, left: Metric.sortButtonEdge, bottom: Metric.sortButtonEdge, right: Metric.sortButtonEdge)
     }
     
     lazy var sortActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet).then {
@@ -198,12 +233,11 @@ class BaseListViewController: BaseViewController {
     }
     
     let headerBottomLineView = UIView(frame: .zero).then {
-        $0.backgroundColor = UIColor(hex:0x666666)
+      $0.backgroundColor = Color.bgColor
     }
     
     // tableview
     lazy var searchTableView = UITableView(frame: .zero, style: .plain).then {
-        $0.register(cellType: SearchResultCell.self)
         $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         $0.rowHeight = 115
         $0.separatorStyle = .none
@@ -223,7 +257,7 @@ class BaseListViewController: BaseViewController {
         $0.backgroundColor = .clear
         $0.textColor = .black
         $0.text = "STR_SEARCH_NO_INPUT".localized
-        $0.font = Font(.Bold, size: 24)
+      $0.font = Font.noDataTitle
         $0.numberOfLines = 0
         $0.textAlignment = .center
     }
@@ -232,7 +266,7 @@ class BaseListViewController: BaseViewController {
         $0.frame = CGRect(x: 0, y: 0, width: self.searchTableView.bounds.width, height: 44)
     }
     
-    // MARK: - Overriden Fucntion
+    // MARK: - Override Fucntion
     /**
      # initView
      - Author: Mephrine
@@ -275,6 +309,10 @@ class BaseListViewController: BaseViewController {
         // 필터뷰 버튼 클릭
         let tapFilterGesture = UITapGestureRecognizer(target: self, action: #selector(showFilterView))
         self.filterButton.addGestureRecognizer(tapFilterGesture)
+      
+      Async.main(after: 0.6) { [weak self] in
+        self?.searchBar.becomeFirstResponder()
+      }
     }
     
     /**
@@ -361,9 +399,50 @@ class BaseListViewController: BaseViewController {
             $0.height.lessThanOrEqualTo(125)
         }
         self.historyTableView.snp.makeConstraints {
-            $0.top.left.bottom.right.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
+  
+  /**
+   # manageHistoryView
+   - Author: Mephrine
+   - Date: 20.07.12
+   - Parameters:
+   - Returns:
+   - Note: 히스토리 뷰 숨김 처리 관리
+   */
+  func manageHistoryView(_ isShowing: Bool) {
+      if isShowing {
+          var isExist = false
+          for view in self.view.subviews {
+              if view == self.historyView {
+                  isExist = true
+                  return
+              }
+          }
+          if !isExist {
+              self.view.addSubview(self.historyView)
+              self.historyView.snp.makeConstraints { [weak self] in
+                  guard let self = self else { return }
+                  $0.top.equalTo(self.searchBar.snp.bottom)
+                  $0.left.right.equalToSuperview()
+                  $0.height.lessThanOrEqualTo(250)
+              }
+          }
+          
+          self.historyView.alpha = 0
+          self.view.layoutIfNeeded()
+          
+          UIView.animate(withDuration: 0.3) {
+              self.historyView.alpha = 1
+          }
+          
+      } else {
+          UIView.animate(withDuration: 0.3, animations: {
+              self.historyView.alpha = 0
+          })
+      }
+  }
     
     // MARK: - User Function
     /**
@@ -407,7 +486,11 @@ class BaseListViewController: BaseViewController {
         }
     }
     
-    func selectActionSort(selected: SearchSort?) {
+    func selectActionSort(selected: SearchSort) {
+
+    }
+    
+    func selectFilter(selected: SearchFilter) {
         
     }
 }
@@ -425,5 +508,14 @@ extension BaseListViewController {
     
     @objc func showSortActionSheet() {
         self.present(sortActionSheet, animated: true, completion: nil)
+    }
+    
+    @objc func selectFilterView(_ gesture: UITapGestureRecognizer) {
+        hideFilterView()
+        guard let button = gesture.view as? UIButton,
+              let selectedText = button.titleLabel?.text,
+              let selectedFilter = SearchFilter(rawValue: selectedText) else { return }
+        
+        selectFilter(selected: selectedFilter)
     }
 }

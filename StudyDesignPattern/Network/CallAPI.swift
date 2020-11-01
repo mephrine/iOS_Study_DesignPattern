@@ -7,7 +7,6 @@
 
 import Alamofire
 import Moya
-import RxSwift
 import SwiftyJSON
 
 public protocol ALSwiftyJSONAble {

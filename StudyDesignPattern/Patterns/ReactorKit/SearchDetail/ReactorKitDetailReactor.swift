@@ -13,6 +13,11 @@ import RxFlow
 import RxSwift
 
 final class ReactorKitDetailReactor: Stepper, Reactor {
+  
+  fileprivate struct Font {
+    static let titleLabelTitle = UIFont.systemFont(ofSize: 15)
+    static let contentLabelTitle = UIFont.systemFont(ofSize: 15)
+  }
     // 네비게이션 이동 관련
     lazy var steps = PublishRelay<Step>()
     
@@ -96,8 +101,8 @@ final class ReactorKitDetailReactor: Stepper, Reactor {
                 newState.thumbnailURL = URL(string: thumbnail)
             }
             newState.name = model.name ?? ""
-            newState.title = model.title?.htmlAttributedString(font: Font(.Regular, size: 15))
-            newState.contents = model.contents?.htmlAttributedString(font: Font(.Regular, size: 15))
+          newState.title = model.title?.htmlAttributedString(font: Font.titleLabelTitle)
+          newState.contents = model.contents?.htmlAttributedString(font: Font.contentLabelTitle)
             newState.dateTime = model.datetime?.toDateKr() ?? ""
             newState.url = model.url ?? ""
         }

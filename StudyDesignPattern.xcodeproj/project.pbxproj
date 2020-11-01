@@ -34,7 +34,6 @@
 		0377DDF0254E81D300DB9BDD /* TouchDownGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377DDEF254E81D300DB9BDD /* TouchDownGestureRecognizer.swift */; };
 		0377DE0C254E82DD00DB9BDD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0377DE0E254E82DD00DB9BDD /* Localizable.strings */; };
 		0377DE15254E844200DB9BDD /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377DE14254E844200DB9BDD /* String+.swift */; };
-		0377DE3E254E891B00DB9BDD /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377DE3D254E891B00DB9BDD /* Fonts.swift */; };
 		0377DE43254E89CF00DB9BDD /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377DE42254E89CF00DB9BDD /* Networking.swift */; };
 		0377DE47254E8A3200DB9BDD /* CustomProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377DE46254E8A3200DB9BDD /* CustomProvider.swift */; };
 		0377DE4B254E8B2C00DB9BDD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377DE4A254E8B2C00DB9BDD /* UIColor+.swift */; };
@@ -43,9 +42,13 @@
 		0377DE5A254E8E9C00DB9BDD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377DE59254E8E9C00DB9BDD /* BaseViewController.swift */; };
 		0377DEA4254E909100DB9BDD /* BaseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377DEA3254E909100DB9BDD /* BaseDetailViewController.swift */; };
 		0377DEA8254E90CB00DB9BDD /* BaseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377DEA7254E90CB00DB9BDD /* BaseListViewController.swift */; };
+		0377E012254EDFA700DB9BDD /* MVCDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E011254EDFA700DB9BDD /* MVCDetailViewController.swift */; };
+		0377E053254EEC2900DB9BDD /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E052254EEC2900DB9BDD /* BaseTableViewCell.swift */; };
+		0377E0DF254F09DC00DB9BDD /* MVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E0DE254F09DC00DB9BDD /* MVCTableViewCell.swift */; };
+		0377E14A254F19FD00DB9BDD /* NonRxSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E149254F19FD00DB9BDD /* NonRxSearchService.swift */; };
 		03D2833225406363009A9254 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D2833125406363009A9254 /* AppDelegate.swift */; };
 		03D2833B25406365009A9254 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03D2833A25406365009A9254 /* Assets.xcassets */; };
-		03D283972545A42B009A9254 /* MVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D283962545A42B009A9254 /* MVCViewController.swift */; };
+		03D283972545A42B009A9254 /* MVCListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D283962545A42B009A9254 /* MVCListViewController.swift */; };
 		03D2839B2545A434009A9254 /* MVVMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D2839A2545A434009A9254 /* MVVMViewController.swift */; };
 		03D2839F2545A43D009A9254 /* RIBsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D2839E2545A43D009A9254 /* RIBsViewController.swift */; };
 		03D283A32545A445009A9254 /* MVPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D283A22545A445009A9254 /* MVPViewController.swift */; };
@@ -98,7 +101,6 @@
 		030B2EE22545DA5E00B92F6B /* SearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
 		0377DDEF254E81D300DB9BDD /* TouchDownGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDownGestureRecognizer.swift; sourceTree = "<group>"; };
 		0377DE14254E844200DB9BDD /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		0377DE3D254E891B00DB9BDD /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		0377DE42254E89CF00DB9BDD /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		0377DE46254E8A3200DB9BDD /* CustomProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProvider.swift; sourceTree = "<group>"; };
 		0377DE4A254E8B2C00DB9BDD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -108,11 +110,15 @@
 		0377DEA3254E909100DB9BDD /* BaseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDetailViewController.swift; sourceTree = "<group>"; };
 		0377DEA7254E90CB00DB9BDD /* BaseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListViewController.swift; sourceTree = "<group>"; };
 		0377DFE7254ED2F200DB9BDD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0377E011254EDFA700DB9BDD /* MVCDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVCDetailViewController.swift; sourceTree = "<group>"; };
+		0377E052254EEC2900DB9BDD /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		0377E0DE254F09DC00DB9BDD /* MVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVCTableViewCell.swift; sourceTree = "<group>"; };
+		0377E149254F19FD00DB9BDD /* NonRxSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonRxSearchService.swift; sourceTree = "<group>"; };
 		03D2832E25406363009A9254 /* StudyDesignPattern.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyDesignPattern.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D2833125406363009A9254 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03D2833A25406365009A9254 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03D2833F25406365009A9254 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03D283962545A42B009A9254 /* MVCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVCViewController.swift; sourceTree = "<group>"; };
+		03D283962545A42B009A9254 /* MVCListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVCListViewController.swift; sourceTree = "<group>"; };
 		03D2839A2545A434009A9254 /* MVVMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMViewController.swift; sourceTree = "<group>"; };
 		03D2839E2545A43D009A9254 /* RIBsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIBsViewController.swift; sourceTree = "<group>"; };
 		03D283A22545A445009A9254 /* MVPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVPViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +182,6 @@
 				030B2E662545D6A500B92F6B /* Async.swift */,
 				030B2E6A2545D6BF00B92F6B /* Schedulers.swift */,
 				0377DDEF254E81D300DB9BDD /* TouchDownGestureRecognizer.swift */,
-				0377DE3D254E891B00DB9BDD /* Fonts.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 			children = (
 				030B2ED32545DA5E00B92F6B /* AppService.swift */,
 				030B2ED42545DA5E00B92F6B /* SearchService.swift */,
+				0377E149254F19FD00DB9BDD /* NonRxSearchService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 				0377DE59254E8E9C00DB9BDD /* BaseViewController.swift */,
 				0377DEA7254E90CB00DB9BDD /* BaseListViewController.swift */,
 				0377DEA3254E909100DB9BDD /* BaseDetailViewController.swift */,
+				0377E052254EEC2900DB9BDD /* BaseTableViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -354,7 +361,9 @@
 		03D283712540665A009A9254 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
-				03D283962545A42B009A9254 /* MVCViewController.swift */,
+				03D283962545A42B009A9254 /* MVCListViewController.swift */,
+				0377E011254EDFA700DB9BDD /* MVCDetailViewController.swift */,
+				0377E0DE254F09DC00DB9BDD /* MVCTableViewCell.swift */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -649,9 +658,11 @@
 				0377DEA8254E90CB00DB9BDD /* BaseListViewController.swift in Sources */,
 				03D2839B2545A434009A9254 /* MVVMViewController.swift in Sources */,
 				03D283A72545A44D009A9254 /* VIPERViewController.swift in Sources */,
+				0377E012254EDFA700DB9BDD /* MVCDetailViewController.swift in Sources */,
 				030B2E382545D57B00B92F6B /* CallAPI.swift in Sources */,
 				0377DE5A254E8E9C00DB9BDD /* BaseViewController.swift in Sources */,
 				03D283AB2545A45A009A9254 /* CleanArtictureViewController.swift in Sources */,
+				0377E0DF254F09DC00DB9BDD /* MVCTableViewCell.swift in Sources */,
 				0377DDF0254E81D300DB9BDD /* TouchDownGestureRecognizer.swift in Sources */,
 				030B2E3E2545D5B200B92F6B /* APILogginPlugin.swift in Sources */,
 				030B2EEB2545DA5E00B92F6B /* SearchResultCell.swift in Sources */,
@@ -660,7 +671,7 @@
 				0377DE4F254E8C1500DB9BDD /* Date+.swift in Sources */,
 				0377DE43254E89CF00DB9BDD /* Networking.swift in Sources */,
 				030B2E7D2545D73F00B92F6B /* ObservableConvertibleType+Void.swift in Sources */,
-				03D283972545A42B009A9254 /* MVCViewController.swift in Sources */,
+				03D283972545A42B009A9254 /* MVCListViewController.swift in Sources */,
 				03D2839F2545A43D009A9254 /* RIBsViewController.swift in Sources */,
 				03D283B72545A591009A9254 /* MainViewController.swift in Sources */,
 				03D2840D2545B85F009A9254 /* Utils.swift in Sources */,
@@ -674,10 +685,10 @@
 				030B2E892545D7A200B92F6B /* Search.swift in Sources */,
 				030B2EE62545DA5E00B92F6B /* AppStep.swift in Sources */,
 				030B2E6B2545D6BF00B92F6B /* Schedulers.swift in Sources */,
+				0377E14A254F19FD00DB9BDD /* NonRxSearchService.swift in Sources */,
 				030B2EE72545DA5E00B92F6B /* AppFlow.swift in Sources */,
 				0377DE47254E8A3200DB9BDD /* CustomProvider.swift in Sources */,
 				030B2E672545D6A500B92F6B /* Async.swift in Sources */,
-				0377DE3E254E891B00DB9BDD /* Fonts.swift in Sources */,
 				030B2E822545D73F00B92F6B /* PrimitiveSequence+SwiftyJSONMapper.swift in Sources */,
 				0377DE15254E844200DB9BDD /* String+.swift in Sources */,
 				030B2E812545D73F00B92F6B /* Single+Response.swift in Sources */,
@@ -685,6 +696,7 @@
 				030B2E7F2545D73F00B92F6B /* MoyaProvider+Rx.swift in Sources */,
 				030B2EED2545DA5E00B92F6B /* SearchResultCellModel.swift in Sources */,
 				030B2EE92545DA5E00B92F6B /* ReactorKitDetailReactor.swift in Sources */,
+				0377E053254EEC2900DB9BDD /* BaseTableViewCell.swift in Sources */,
 				0377DE55254E8DC900DB9BDD /* UserDefaults+.swift in Sources */,
 				030B2E7E2545D73F00B92F6B /* Observable+Response.swift in Sources */,
 				030B2EE82545DA5E00B92F6B /* ReactorKitDetailViewController.swift in Sources */,

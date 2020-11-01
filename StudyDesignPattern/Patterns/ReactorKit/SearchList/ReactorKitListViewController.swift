@@ -56,58 +56,18 @@ final class ReactorKitListViewController: BaseListViewController, View {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Async.main(after: 0.6) { [weak self] in
-            self?.searchBar.becomeFirstResponder()
-        }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
+  
+  override func initView() {
+    searchTableView.register(cellType: SearchResultCell.self)
+    super.initView()
+  }
     
-    /**
-     # manageHistoryView
-     - Author: Mephrine
-     - Date: 20.07.12
-     - Parameters:
-     - Returns:
-     - Note: 히스토리 뷰 숨김 처리 관리
-     */
-    func manageHistoryView(_ isShowing: Bool) {
-        if isShowing {
-            var isExist = false
-            for view in self.view.subviews {
-                if view == self.historyView {
-                    isExist = true
-                    return
-                }
-            }
-            if !isExist {
-                self.view.addSubview(self.historyView)
-                self.historyView.snp.makeConstraints { [weak self] in
-                    guard let self = self else { return }
-                    $0.top.equalTo(self.searchBar.snp.bottom)
-                    $0.left.right.equalToSuperview()
-                    $0.height.height.lessThanOrEqualTo(250)
-                }
-            }
-            
-            self.historyView.alpha = 0
-            self.view.layoutIfNeeded()
-            
-            UIView.animate(withDuration: 0.3) {
-                self.historyView.alpha = 1
-            }
-            
-        } else {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.historyView.alpha = 0
-            })
-        }
-    }
-   
     //MARK: - Bind
     func bind(reactor: ReactorKitListReactor) {
         // action
@@ -139,7 +99,7 @@ final class ReactorKitListViewController: BaseListViewController, View {
             .debounce(RxTimeInterval.milliseconds(300))
             .distinctUntilChanged()
             .do(onNext: { [weak self] _ in
-                self?.manageHistoryView(false)
+                self?.manageHistoryView(true)
                 self?.searchBar.resignFirstResponder()
             })
             .map{ Reactor.Action.tapSearchButton(searchText: $0) }
