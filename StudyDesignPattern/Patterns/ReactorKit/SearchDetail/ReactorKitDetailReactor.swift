@@ -101,9 +101,9 @@ final class ReactorKitDetailReactor: Stepper, Reactor {
                 newState.thumbnailURL = URL(string: thumbnail)
             }
             newState.name = model.name ?? ""
-          newState.title = model.title?.htmlAttributedString(font: Font.titleLabelTitle)
-          newState.contents = model.contents?.htmlAttributedString(font: Font.contentLabelTitle)
-            newState.dateTime = model.datetime?.toDateKr() ?? ""
+          newState.title = model.title.htmlAttributedString(font: Font.titleLabelTitle)
+          newState.contents = model.contents.htmlAttributedString(font: Font.contentLabelTitle)
+            newState.dateTime = model.datetime.toDateKr() ?? ""
             newState.url = model.url ?? ""
         }
         return newState

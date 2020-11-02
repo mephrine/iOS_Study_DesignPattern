@@ -33,8 +33,8 @@ class MVCDetailViewController: BaseDetailViewController {
     }
     
     nameLabel.text = model.name
-    titleLabel.attributedText = model.title?.htmlAttributedString(font: Font.titleLabelTitle)
-    contentsLabel.attributedText = model.contents?.htmlAttributedString(font: Font.contentLabelTitle)
+    titleLabel.attributedText = model.title.htmlAttributedString(font: Font.titleLabelTitle)
+    contentsLabel.attributedText = model.contents.htmlAttributedString(font: Font.contentLabelTitle)
     dateTimeLabel.text = model.datetime
     urlLabel.text = model.url
   }

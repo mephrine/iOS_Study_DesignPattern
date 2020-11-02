@@ -512,7 +512,7 @@ final class ReactorKitListReactor: Reactor, Stepper {
         var index2: Int = 0
         var sortedAllList = [SearchItem]()
         while index1 < list.count && index2 < list2.count {
-            if sortText(str1: list[index1].title!, str2: list2[index2].title!) {
+            if sortText(str1: list[index1].title, str2: list2[index2].title) {
                 sortedAllList.append(list[index1])
                 index1 += 1
             } else {
@@ -549,7 +549,7 @@ final class ReactorKitListReactor: Reactor, Stepper {
         var index2: Int = 0
         var sortedAllList = [SearchItem]()
         while index1 < list.count && index2 < list2.count {
-            if sortDateTime(str1: list[index1].datetime!, str2: list2[index2].datetime!) {
+            if sortDateTime(str1: list[index1].datetime, str2: list2[index2].datetime) {
                 sortedAllList.append(list[index1])
                 index1 += 1
             } else {

@@ -59,11 +59,11 @@ struct SearchResultCellModel {
     }
     
     var title: NSAttributedString? {
-      return model.title?.htmlAttributedString(font: Font.titleLabelTitle)
+      return model.title.htmlAttributedString(font: Font.titleLabelTitle)
     }
     
     var dateTime: String {
-        return model.datetime?.toNearDateStr() ?? ""
+        return model.datetime.toNearDateStr() ?? ""
     }
     
     var isReading: Bool {
