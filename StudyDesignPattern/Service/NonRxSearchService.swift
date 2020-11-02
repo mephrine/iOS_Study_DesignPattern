@@ -20,13 +20,13 @@ protocol HasNonRxSearchService {
  - Note: 검색 관련 서비스 프로토콜에서 구현되는 항목
 */
 protocol NonRxSearchServiceProtocol {
-    func fetchSearchCafe(_ searchText: String, _ sort: SearchSort, _ page: Int) throws -> SearchResult?
-    func fetchSearchBlog(_ searchText: String, _ sort: SearchSort, _ page: Int) throws -> SearchResult?
+    func fetchSearchCafe(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, APIError)->()) throws
+    func fetchSearchBlog(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, APIError)->()) throws
     func defaultSearchHistory() -> [String]?
 }
 
 open class NonRxSearchService: NonRxSearchServiceProtocol {
-    private let networking = Networking()
+    private let networking = NonRxNetworking()
     
     /**
      # fetchSearchCafe
@@ -39,10 +39,19 @@ open class NonRxSearchService: NonRxSearchServiceProtocol {
      - Returns: SearchResult
      - Note: 네트워크 통신을 통해 카페 검색 정보를 받아옴.
     */
-  func fetchSearchCafe(_ searchText: String, _ sort: SearchSort, _ page: Int) throws -> SearchResult? {
+    func fetchSearchCafe(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, APIError)->()) throws {
         networking.session.cancelAllRequests()
-        return try networking.request(.searchCafe(query: searchText, sort: sort.value, page: page))
-          .map(SearchResult.self)
+        
+        try networking.request(.searchCafe(query: searchText, sort: sort.value, page: page)) { result in
+            switch result {
+                case let .success(moyaResponse):
+                    let data = moyaResponse.data
+                    let statusCode = moyaResponse.statusCode
+                    break;
+                case let .failure(error):
+                    break;
+                }
+        }
     }
     
     /**
@@ -56,10 +65,18 @@ open class NonRxSearchService: NonRxSearchServiceProtocol {
      - Returns: Single<SearchResult>
      - Note: 네트워크 통신을 통해 블로그 검색 정보를 받아옴.
     */
-    func fetchSearchBlog(_ searchText: String, _ sort: SearchSort, _ page: Int) throws -> SearchResult? {
+    func fetchSearchBlog(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, APIError)->()) throws{
         networking.session.cancelAllRequests()
-        return try networking.request(.searchBlog(query: searchText, sort: sort.value, page: page))
-        .map(to: SearchResult.self)
+         try networking.request(.searchBlog(query: searchText, sort: sort.value, page: page)) { result in
+            switch result {
+                case let .success(moyaResponse):
+                    let data = moyaResponse.data
+                    let statusCode = moyaResponse.statusCode
+                    break;
+                case let .failure(error):
+                    break;
+                }
+        }
     }
     
     /**

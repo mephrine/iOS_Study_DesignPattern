@@ -10,6 +10,7 @@ import RxSwift
 
 //typealias completeNetwork = (ResultNetwork, Response)
 typealias Networking = NetworkingAPI<CallAPI>
+typealias NonRxNetworking = MoyaProvider<CallAPI>
 
 
 /**
@@ -19,11 +20,6 @@ typealias Networking = NetworkingAPI<CallAPI>
  - Note: Moya Provider를 커스터마이징한 CustomProvider를 이용해 request 통신을 담당하는 클래스
  */
 final class NetworkingAPI<Target: TargetType>: CustomProvider<Target> {
-  // TODO: 해당 부분 제거하고, CustomProvider에서 관련 함수 만들어야함.
-  func request(_ target: Target) -> Response {
-    return self.request(target)
-  }
-  
     /**
         # request
             - Author: Mephrine
