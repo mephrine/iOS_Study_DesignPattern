@@ -15,11 +15,10 @@
 		030B2E7D2545D73F00B92F6B /* ObservableConvertibleType+Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2E762545D73F00B92F6B /* ObservableConvertibleType+Void.swift */; };
 		030B2E7E2545D73F00B92F6B /* Observable+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2E782545D73F00B92F6B /* Observable+Response.swift */; };
 		030B2E7F2545D73F00B92F6B /* MoyaProvider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2E792545D73F00B92F6B /* MoyaProvider+Rx.swift */; };
-		030B2E802545D73F00B92F6B /* Response+SwiftyJSONMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2E7A2545D73F00B92F6B /* Response+SwiftyJSONMapper.swift */; };
+		030B2E802545D73F00B92F6B /* Response+CodableMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2E7A2545D73F00B92F6B /* Response+CodableMapper.swift */; };
 		030B2E812545D73F00B92F6B /* Single+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2E7B2545D73F00B92F6B /* Single+Response.swift */; };
-		030B2E822545D73F00B92F6B /* PrimitiveSequence+SwiftyJSONMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2E7C2545D73F00B92F6B /* PrimitiveSequence+SwiftyJSONMapper.swift */; };
+		030B2E822545D73F00B92F6B /* PrimitiveSequence+CodableMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2E7C2545D73F00B92F6B /* PrimitiveSequence+CodableMapper.swift */; };
 		030B2E892545D7A200B92F6B /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2E882545D7A200B92F6B /* Search.swift */; };
-		030B2E8D2545D80500B92F6B /* JSON+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2E8C2545D80500B92F6B /* JSON+Ext.swift */; };
 		030B2EE42545DA5E00B92F6B /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2ED32545DA5E00B92F6B /* AppService.swift */; };
 		030B2EE52545DA5E00B92F6B /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2ED42545DA5E00B92F6B /* SearchService.swift */; };
 		030B2EE62545DA5E00B92F6B /* AppStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030B2ED62545DA5E00B92F6B /* AppStep.swift */; };
@@ -46,6 +45,7 @@
 		0377E053254EEC2900DB9BDD /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E052254EEC2900DB9BDD /* BaseTableViewCell.swift */; };
 		0377E0DF254F09DC00DB9BDD /* MVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E0DE254F09DC00DB9BDD /* MVCTableViewCell.swift */; };
 		0377E14A254F19FD00DB9BDD /* NonRxSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E149254F19FD00DB9BDD /* NonRxSearchService.swift */; };
+		0377E1982550427700DB9BDD /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E1972550427700DB9BDD /* Data+.swift */; };
 		03D2833225406363009A9254 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D2833125406363009A9254 /* AppDelegate.swift */; };
 		03D2833B25406365009A9254 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03D2833A25406365009A9254 /* Assets.xcassets */; };
 		03D283972545A42B009A9254 /* MVCListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D283962545A42B009A9254 /* MVCListViewController.swift */; };
@@ -83,11 +83,10 @@
 		030B2E762545D73F00B92F6B /* ObservableConvertibleType+Void.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+Void.swift"; sourceTree = "<group>"; };
 		030B2E782545D73F00B92F6B /* Observable+Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Response.swift"; sourceTree = "<group>"; };
 		030B2E792545D73F00B92F6B /* MoyaProvider+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+Rx.swift"; sourceTree = "<group>"; };
-		030B2E7A2545D73F00B92F6B /* Response+SwiftyJSONMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Response+SwiftyJSONMapper.swift"; sourceTree = "<group>"; };
+		030B2E7A2545D73F00B92F6B /* Response+CodableMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Response+CodableMapper.swift"; sourceTree = "<group>"; };
 		030B2E7B2545D73F00B92F6B /* Single+Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Single+Response.swift"; sourceTree = "<group>"; };
-		030B2E7C2545D73F00B92F6B /* PrimitiveSequence+SwiftyJSONMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PrimitiveSequence+SwiftyJSONMapper.swift"; sourceTree = "<group>"; };
+		030B2E7C2545D73F00B92F6B /* PrimitiveSequence+CodableMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PrimitiveSequence+CodableMapper.swift"; sourceTree = "<group>"; };
 		030B2E882545D7A200B92F6B /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
-		030B2E8C2545D80500B92F6B /* JSON+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Ext.swift"; sourceTree = "<group>"; };
 		030B2ED32545DA5E00B92F6B /* AppService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
 		030B2ED42545DA5E00B92F6B /* SearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		030B2ED62545DA5E00B92F6B /* AppStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStep.swift; sourceTree = "<group>"; };
@@ -114,6 +113,7 @@
 		0377E052254EEC2900DB9BDD /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		0377E0DE254F09DC00DB9BDD /* MVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVCTableViewCell.swift; sourceTree = "<group>"; };
 		0377E149254F19FD00DB9BDD /* NonRxSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonRxSearchService.swift; sourceTree = "<group>"; };
+		0377E1972550427700DB9BDD /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
 		03D2832E25406363009A9254 /* StudyDesignPattern.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyDesignPattern.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D2833125406363009A9254 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03D2833A25406365009A9254 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -190,11 +190,11 @@
 			isa = PBXGroup;
 			children = (
 				030B2E752545D73F00B92F6B /* Rx */,
-				030B2E8C2545D80500B92F6B /* JSON+Ext.swift */,
 				0377DE14254E844200DB9BDD /* String+.swift */,
 				0377DE4A254E8B2C00DB9BDD /* UIColor+.swift */,
 				0377DE4E254E8C1500DB9BDD /* Date+.swift */,
 				0377DE54254E8DC900DB9BDD /* UserDefaults+.swift */,
+				0377E1972550427700DB9BDD /* Data+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -213,9 +213,9 @@
 			children = (
 				030B2E782545D73F00B92F6B /* Observable+Response.swift */,
 				030B2E792545D73F00B92F6B /* MoyaProvider+Rx.swift */,
-				030B2E7A2545D73F00B92F6B /* Response+SwiftyJSONMapper.swift */,
+				030B2E7A2545D73F00B92F6B /* Response+CodableMapper.swift */,
 				030B2E7B2545D73F00B92F6B /* Single+Response.swift */,
-				030B2E7C2545D73F00B92F6B /* PrimitiveSequence+SwiftyJSONMapper.swift */,
+				030B2E7C2545D73F00B92F6B /* PrimitiveSequence+CodableMapper.swift */,
 			);
 			path = MoyaRx;
 			sourceTree = "<group>";
@@ -677,10 +677,10 @@
 				03D2840D2545B85F009A9254 /* Utils.swift in Sources */,
 				03D284072545B84E009A9254 /* ServiceStub.swift in Sources */,
 				030B2EE52545DA5E00B92F6B /* SearchService.swift in Sources */,
+				0377E1982550427700DB9BDD /* Data+.swift in Sources */,
 				030B2E612545D68D00B92F6B /* Logger.swift in Sources */,
-				030B2E802545D73F00B92F6B /* Response+SwiftyJSONMapper.swift in Sources */,
+				030B2E802545D73F00B92F6B /* Response+CodableMapper.swift in Sources */,
 				03D2833225406363009A9254 /* AppDelegate.swift in Sources */,
-				030B2E8D2545D80500B92F6B /* JSON+Ext.swift in Sources */,
 				030B2EEC2545DA5E00B92F6B /* SearchHistoryCell.swift in Sources */,
 				030B2E892545D7A200B92F6B /* Search.swift in Sources */,
 				030B2EE62545DA5E00B92F6B /* AppStep.swift in Sources */,
@@ -689,7 +689,7 @@
 				030B2EE72545DA5E00B92F6B /* AppFlow.swift in Sources */,
 				0377DE47254E8A3200DB9BDD /* CustomProvider.swift in Sources */,
 				030B2E672545D6A500B92F6B /* Async.swift in Sources */,
-				030B2E822545D73F00B92F6B /* PrimitiveSequence+SwiftyJSONMapper.swift in Sources */,
+				030B2E822545D73F00B92F6B /* PrimitiveSequence+CodableMapper.swift in Sources */,
 				0377DE15254E844200DB9BDD /* String+.swift in Sources */,
 				030B2E812545D73F00B92F6B /* Single+Response.swift in Sources */,
 				03D283AF2545A465009A9254 /* ReactorKitListViewController.swift in Sources */,

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 //
 //func jsonStringToData<T>(_ jsonString: String) -> T? {
 //    if let data = jsonString.data(using: .utf8) {

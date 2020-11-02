@@ -7,11 +7,6 @@
 
 import Alamofire
 import Moya
-import SwiftyJSON
-
-public protocol ALSwiftyJSONAble {
-    init?(jsonData:JSON)
-}
 
 /**
 # (E) APIError
@@ -20,7 +15,7 @@ public protocol ALSwiftyJSONAble {
 - Note: API Error 모음
 */
 enum APIError: Error {
-    case noData
+  case noData
     
     var desc: String? {
         switch self {

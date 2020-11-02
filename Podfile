@@ -30,7 +30,7 @@ target 'StudyDesignPattern' do
   pod  'Moya'
   
   ## Parsing
-  pod  'SwiftyJSON'
+#  pod  'SwiftyJSON'
   
   # Misc.
   pod "Then"
