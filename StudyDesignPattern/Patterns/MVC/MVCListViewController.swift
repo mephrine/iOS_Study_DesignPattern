@@ -58,29 +58,49 @@ final class MVCListViewController: BaseListViewController {
     - Parameters: searchText
     - Note: 검색하기
     */
-  func requestSearch(searchText: String, filterState: SearchFilter, sortState: SearchSort) throws -> SearchResult? {
+  func requestSearch(searchText: String, filterState: SearchFilter, sortState: SearchSort, _ completion: @escaping (SearchResult?)-> ()) {
+//    return nil
     if (filterState == .blog) {
-      return try service.nonRxSearchService.fetchSearchBlog(searchText, sortState, page)
+      return service.nonRxSearchService.fetchSearchBlog(searchText, sortState, page) { (response, error) in
+        if let result = response {
+          completion(result)
+          return
+        }
+        completion(nil)
+      }
     } else {
-      return try service.nonRxSearchService.fetchSearchCafe(searchText, sortState, page)
+      return service.nonRxSearchService.fetchSearchCafe(searchText, sortState, page) { (response, error) in
+        if let result = response {
+          completion(result)
+          return
+        }
+        completion(nil)
+      }
     }
   }
     
   func searchText() {
     do {
-      let result = try searchBar.text?
-        .compactMap{ String($0).trimSide }
-        .filter { $0 != recentlySearchWord }
-        .compactMap { try requestSearch(searchText: $0, filterState: filterState, sortState: sortState) }
-        .compactMap { $0.items }
-        .flatMap{ $0 }
+      let searchText = searchBar.text?.trimSide ?? ""
+      if searchText == recentlySearchWord || searchText.isEmpty { return }
       
-      if (result?.count ?? 0) > 0 {
-        page += 1
-        recentlySearchWord = searchBar.text!
-        searchItems += result!
-        searchTableView.reloadData()
+      requestSearch(searchText: searchText, filterState: filterState, sortState: sortState) { [weak self] response in
+        guard let self = self else { return }
+        if (response?.items?.count ?? 0) > 0 {
+          self.page += 1
+          if let searchWord =  self.searchBar.text {
+            self.recentlySearchWord = searchWord
+          }
+          self.searchItems += response?.items ?? []
+          self.searchTableView.reloadData()
+        }
       }
+      
+//        .compactMap {
+//        }
+//        .compactMap { $0.items }
+//        .flatMap{ $0 }
+      
     } catch let error {
       log.e("request api error : \(error.localizedDescription)")
     }
