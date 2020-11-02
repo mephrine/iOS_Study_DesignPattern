@@ -99,7 +99,7 @@ final class ReactorKitListViewController: BaseListViewController, View {
             .debounce(RxTimeInterval.milliseconds(300))
             .distinctUntilChanged()
             .do(onNext: { [weak self] _ in
-                self?.manageHistoryView(true)
+                self?.manageHistoryView(false)
                 self?.searchBar.resignFirstResponder()
             })
             .map{ Reactor.Action.tapSearchButton(searchText: $0) }
