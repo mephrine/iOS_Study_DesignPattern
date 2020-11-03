@@ -31,6 +31,12 @@ target 'StudyDesignPattern' do
   
   ## Parsing
 #  pod  'SwiftyJSON'
+
+  # Lint
+  pod 'SwiftLint'
+  
+  #DI
+  pod 'Pure'
   
   # Misc.
   pod "Then"
