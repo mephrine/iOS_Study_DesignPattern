@@ -21,7 +21,7 @@ target 'StudyDesignPattern' do
   pod  "Kingfisher"
 
   #DI
-  pod 'Swinject'
+  pod 'Pure'
 
   #Lint
   pod 'SwiftLint'

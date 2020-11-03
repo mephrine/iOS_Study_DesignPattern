@@ -20,11 +20,7 @@ final class MainViewController: UITableViewController {
         case mvc = "MVC"
         
         func viewController() -> UIViewController? {
-          let services: AppService = {
-            let searchService = SearchService()
-            let nonRxSearchService = NonRxSearchService()
-            return AppService(searchService: searchService, nonRxSearchService: nonRxSearchService)
-          }()
+          let services = AppDependency.resolve().service
           
             switch self {
             case .reactorkit:

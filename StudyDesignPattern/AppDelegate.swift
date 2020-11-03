@@ -10,7 +10,21 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+  
+  private let dependency: AppDependency
+  
+  // MARK: - DI
+  private override init() {
+    self.dependency = AppDependency.resolve()
+    super.init()
+  }
+  
+  init(dependency: AppDependency) {
+    self.dependency = dependency
+    super.init()
+  }
 
+  // MARK: - App Lifecycle
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
         self.window = UIWindow(frame: UIScreen.main.bounds)

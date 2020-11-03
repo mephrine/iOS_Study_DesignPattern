@@ -46,6 +46,7 @@
 		0377E0DF254F09DC00DB9BDD /* MVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E0DE254F09DC00DB9BDD /* MVCTableViewCell.swift */; };
 		0377E14A254F19FD00DB9BDD /* NonRxSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E149254F19FD00DB9BDD /* NonRxSearchService.swift */; };
 		0377E1982550427700DB9BDD /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E1972550427700DB9BDD /* Data+.swift */; };
+		0377E20425516A6800DB9BDD /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377E20325516A6800DB9BDD /* AppDependency.swift */; };
 		03D2833225406363009A9254 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D2833125406363009A9254 /* AppDelegate.swift */; };
 		03D2833B25406365009A9254 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03D2833A25406365009A9254 /* Assets.xcassets */; };
 		03D283972545A42B009A9254 /* MVCListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D283962545A42B009A9254 /* MVCListViewController.swift */; };
@@ -114,6 +115,7 @@
 		0377E0DE254F09DC00DB9BDD /* MVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVCTableViewCell.swift; sourceTree = "<group>"; };
 		0377E149254F19FD00DB9BDD /* NonRxSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonRxSearchService.swift; sourceTree = "<group>"; };
 		0377E1972550427700DB9BDD /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
+		0377E20325516A6800DB9BDD /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 		03D2832E25406363009A9254 /* StudyDesignPattern.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyDesignPattern.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D2833125406363009A9254 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03D2833A25406365009A9254 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -321,6 +323,14 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		0377E20225516A5C00DB9BDD /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				0377E20325516A6800DB9BDD /* AppDependency.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
 		03D2832525406362009A9254 = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +354,8 @@
 		03D2833025406363009A9254 /* StudyDesignPattern */ = {
 			isa = PBXGroup;
 			children = (
+				03D2833125406363009A9254 /* AppDelegate.swift */,
+				0377E20225516A5C00DB9BDD /* DI */,
 				0377DE58254E8E8D00DB9BDD /* Base */,
 				0377DE41254E899C00DB9BDD /* Patterns */,
 				030B2E362545D56600B92F6B /* Network */,
@@ -353,7 +365,6 @@
 				030B2E6E2545D6F300B92F6B /* Extension */,
 				0377DE07254E828E00DB9BDD /* Supporting Files */,
 				03D283B62545A591009A9254 /* MainViewController.swift */,
-				03D2833125406363009A9254 /* AppDelegate.swift */,
 			);
 			path = StudyDesignPattern;
 			sourceTree = "<group>";
@@ -667,6 +678,7 @@
 				030B2E3E2545D5B200B92F6B /* APILogginPlugin.swift in Sources */,
 				030B2EEB2545DA5E00B92F6B /* SearchResultCell.swift in Sources */,
 				030B2EE42545DA5E00B92F6B /* AppService.swift in Sources */,
+				0377E20425516A6800DB9BDD /* AppDependency.swift in Sources */,
 				03D283A32545A445009A9254 /* MVPViewController.swift in Sources */,
 				0377DE4F254E8C1500DB9BDD /* Date+.swift in Sources */,
 				0377DE43254E89CF00DB9BDD /* Networking.swift in Sources */,

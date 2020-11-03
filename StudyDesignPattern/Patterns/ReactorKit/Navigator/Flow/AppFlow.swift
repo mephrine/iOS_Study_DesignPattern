@@ -57,7 +57,7 @@ class AppFlow: Flow {
     
     // 메인화면 띄우기.
     private func goSearchList() -> FlowContributors {
-        let reactor = ReactorKitListReactor(withService: service)
+      let reactor = AppDependency.resolve().reactorKitListReactor
         let searchVC = ReactorKitListViewController(reactor: reactor)
         self.rootViewController.setViewControllers([searchVC], animated: false)
 
