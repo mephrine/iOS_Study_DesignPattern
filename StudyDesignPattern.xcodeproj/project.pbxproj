@@ -281,7 +281,6 @@
 			children = (
 				030B2EDF2545DA5E00B92F6B /* SearchResultCell.swift */,
 				030B2EE22545DA5E00B92F6B /* SearchResultCell.xib */,
-				030B2EE02545DA5E00B92F6B /* SearchHistoryCell.swift */,
 				030B2EE12545DA5E00B92F6B /* SearchResultCellModel.swift */,
 			);
 			path = Cell;
@@ -319,6 +318,7 @@
 				0377DEA7254E90CB00DB9BDD /* BaseListViewController.swift */,
 				0377DEA3254E909100DB9BDD /* BaseDetailViewController.swift */,
 				0377E052254EEC2900DB9BDD /* BaseTableViewCell.swift */,
+				030B2EE02545DA5E00B92F6B /* SearchHistoryCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";

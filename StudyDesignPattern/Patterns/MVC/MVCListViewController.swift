@@ -142,10 +142,9 @@ extension MVCListViewController: UITableViewDelegate, UITableViewDataSource {
   }
     
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? MVCTableViewCell else {
-      return UITableViewCell()
-    }
+    let cell: MVCTableViewCell = tableView.dequeueReusableCell(for: indexPath)
     
+    //indexPath
     let model = searchItems[indexPath.row]
     cell.configuration(model: model)
     

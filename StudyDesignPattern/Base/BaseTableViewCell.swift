@@ -9,7 +9,7 @@ import UIKit
 
 class BaseTableViewCell: UITableViewCell {
   // MARK: - Const
-  fileprivate struct Font {
+  internal struct Font {
     static let titleLabelTitle = UIFont.systemFont(ofSize: 17)
     static let dateTimeLabelTitle = UIFont.systemFont(ofSize: 15)
     static let typeLabelTitle = UIFont.boldSystemFont(ofSize: 14)
@@ -22,9 +22,10 @@ class BaseTableViewCell: UITableViewCell {
     static let dimBbColor = UIColor(hex: 0xccffffff)
   }
   
-  // MARK: - model
-  var model: SearchItem?
+  fileprivate struct Metric {
     
+  }
+  
   // MARK: - View
   let thumbnailView = UIImageView(frame: .zero).then {
     $0.contentMode = .scaleAspectFit
@@ -39,6 +40,7 @@ class BaseTableViewCell: UITableViewCell {
     $0.font = Font.typeLabelTitle
     $0.textColor = Color.typeLabelTextColor
     $0.numberOfLines = 1
+    $0.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 751), for: NSLayoutConstraint.Axis.horizontal)
     
     $0.snp.makeConstraints {
       $0.top.equalToSuperview().offset(2)
@@ -93,13 +95,25 @@ class BaseTableViewCell: UITableViewCell {
   }
   
   func constraints() {
-    
-    
     containerView.snp.makeConstraints {
       $0.left.equalToSuperview().offset(20)
       $0.top.equalTo(thumbnailView.snp.top)
       $0.bottom.equalTo(thumbnailView.snp.bottom)
       $0.right.equalTo(thumbnailView.snp.left).offset(15)
+    }
+    
+    headerView.snp.makeConstraints {
+      $0.top.left.right.equalToSuperview()
+    }
+    
+    titleLabel.snp.makeConstraints {
+      $0.top.equalTo(headerView.snp.bottom).offset(10)
+      $0.left.right.equalToSuperview()
+    }
+    
+    dateTimeLabel.snp.makeConstraints {
+      $0.top.greaterThanOrEqualTo(titleLabel.snp.bottom).offset(10)
+      $0.left.right.bottom.equalToSuperview()
     }
     
     thumbnailView.snp.makeConstraints {
@@ -118,11 +132,11 @@ class BaseTableViewCell: UITableViewCell {
       super.init(style: style, reuseIdentifier: reuseIdentifier)
       
     initView()
-    constraint()
+    constraints()
     self.selectionStyle = .none
   }
   
-  required init?(coder: NSCoder) {
+  required convenience init?(coder: NSCoder) {
     self.init(style: .default, reuseIdentifier: nil)
   }
   
