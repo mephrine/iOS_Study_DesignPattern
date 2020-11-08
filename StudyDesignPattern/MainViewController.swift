@@ -30,7 +30,7 @@ final class MainViewController: UITableViewController {
                 
                 // flow 생성 및 코디네이터에 적용
                 let appFlow = AppFlow(service: services)
-                Flows.whenReady(flow1: appFlow) { root in
+              Flows.use(appFlow, when: .created) { root in
                     guard let window = applicationWindow else { return }
                     window.makeKeyAndVisible()
                     window.rootViewController = root
@@ -46,7 +46,7 @@ final class MainViewController: UITableViewController {
             case .mvp: return MVPViewController()
             case .ribs: return RIBsViewController()
             case .mvvm: return MVVMViewController()
-            case .mvc: return MVCListViewController(service: services)
+            case .mvc: return AppDependency.resolve().mvcListViewController
             }
         }
     }

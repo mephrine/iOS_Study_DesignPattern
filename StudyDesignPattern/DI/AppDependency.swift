@@ -14,6 +14,7 @@ struct AppDependency {
   let service: AppService
   let reactorKitListReactor: ReactorKitListReactor
 //  let reactorKitDetailReactor: ReactorKitDetailReactor
+  let mvcListViewController: MVCListViewController
 }
 
 extension AppDependency {
@@ -23,8 +24,9 @@ extension AppDependency {
     let service = AppService(searchService: searchService, nonRxSearchService: nonRxSearchService)
     let reactorKitListReactor = ReactorKitListReactor(withService: service)
 //    let reactorKitDetailReactor = ReactorKitDetailReactor(selectedModel: service, index: <#Int#>)
+    let mvcListViewController = MVCListViewController(service: service)
     
-    return AppDependency(searchService: searchService, nonRxSearchService: nonRxSearchService, service: service, reactorKitListReactor: reactorKitListReactor)
+    return AppDependency(searchService: searchService, nonRxSearchService: nonRxSearchService, service: service, reactorKitListReactor: reactorKitListReactor, mvcListViewController: mvcListViewController)
   }
     
 }

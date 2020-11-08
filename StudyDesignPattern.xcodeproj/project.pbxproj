@@ -355,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				03D2833125406363009A9254 /* AppDelegate.swift */,
+				03D283B62545A591009A9254 /* MainViewController.swift */,
 				0377E20225516A5C00DB9BDD /* DI */,
 				0377DE58254E8E8D00DB9BDD /* Base */,
 				0377DE41254E899C00DB9BDD /* Patterns */,
@@ -364,7 +365,6 @@
 				030B2E872545D79700B92F6B /* Model */,
 				030B2E6E2545D6F300B92F6B /* Extension */,
 				0377DE07254E828E00DB9BDD /* Supporting Files */,
-				03D283B62545A591009A9254 /* MainViewController.swift */,
 			);
 			path = StudyDesignPattern;
 			sourceTree = "<group>";
