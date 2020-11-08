@@ -29,6 +29,7 @@ class BaseDetailViewController: BaseViewController {
     let thumnailView = UIImageView(frame: .zero).then {
       $0.translatesAutoresizingMaskIntoConstraints = false
       $0.contentMode = .scaleAspectFit
+      $0.image = UIImage(named: "placeholder")
     }
     let nameLabel = UILabel(frame: .zero).then {
       $0.translatesAutoresizingMaskIntoConstraints = false
@@ -125,6 +126,8 @@ class BaseDetailViewController: BaseViewController {
     
     // MARK: - UI
     override func initView() {
+      self.view.backgroundColor = .white
+      
         //navi
         let button = UIButton(frame: CGRect.zero)
         button.addTarget(self, action: #selector(goBack), for: .touchUpInside)

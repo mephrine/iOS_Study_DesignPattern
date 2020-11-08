@@ -37,6 +37,8 @@ class MVCDetailViewController: BaseDetailViewController {
     contentsLabel.attributedText = model.contents.htmlAttributedString(font: Font.contentLabelTitle)
     dateTimeLabel.text = model.datetime
     urlLabel.text = model.url
+    
+    self.navigationItem.title = model.name
   }
   
   override func clickToBackButton() {

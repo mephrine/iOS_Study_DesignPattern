@@ -67,10 +67,7 @@ protocol SelectSortProtocol: AnyObject {
 }
 
 
-
-
-
-class BaseListViewController: BaseViewController, SelectSortProtocol {
+class BaseListViewController: BaseViewController {
     // Gesture
     lazy var touchSuperViewGesture = TouchDownGestureRecognizer(target: self, action: #selector(hideFilterView))
   
@@ -255,7 +252,7 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
         $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         $0.rowHeight = 115
         $0.separatorStyle = .none
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .white
         $0.keyboardDismissMode = .onDrag
         if #available(iOS 11.0, *) {
             $0.contentInsetAdjustmentBehavior = .never
@@ -294,6 +291,7 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
     */
     //MARK: - UI
     override func initView() {
+      self.view.backgroundColor = .white
         // search Bar
         self.view.addSubview(self.searchBar)
         self.view.addSubview(self.searchButton)
@@ -532,7 +530,27 @@ extension BaseListViewController {
         guard let button = gesture.view as? UIButton,
               let selectedText = button.titleLabel?.text,
               let selectedFilter = SearchFilter(rawValue: selectedText) else { return }
-        
-        selectFilter(selected: selectedFilter)
+      
+      // 필터 스택 뷰
+      if let filterButton1 = self.filterStackView.arrangedSubviews.filter({ $0.tag == 901 }).first as? UIButton,
+          let filterButton2 = self.filterStackView.arrangedSubviews.filter({ $0.tag == 902 }).first as? UIButton {
+        self.filterButton.setTitle(selectedFilter.desc, for: .normal)
+        switch selectedFilter {
+        case .all:
+            filterButton1.setTitle(SearchFilter.blog.desc, for: .normal)
+            filterButton2.setTitle(SearchFilter.cafe.desc, for: .normal)
+            break
+        case .blog:
+            filterButton1.setTitle(SearchFilter.all.desc, for: .normal)
+            filterButton2.setTitle(SearchFilter.cafe.desc, for: .normal)
+            break
+        case .cafe:
+            filterButton1.setTitle(SearchFilter.all.desc, for: .normal)
+            filterButton2.setTitle(SearchFilter.blog.desc, for: .normal)
+            break
+        }
+      }
+      
+      selectFilter(selected: selectedFilter)
     }
 }

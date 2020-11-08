@@ -20,13 +20,13 @@ protocol HasNonRxSearchService {
  - Note: 검색 관련 서비스 프로토콜에서 구현되는 항목
 */
 protocol NonRxSearchServiceProtocol {
-    func fetchSearchCafe(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, MoyaError?)->())
-    func fetchSearchBlog(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, MoyaError?)->())
-    func defaultSearchHistory() -> [String]?
+  func fetchSearchCafe(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, MoyaError?)->())
+  func fetchSearchBlog(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, MoyaError?)->())
+  func defaultSearchHistory() -> [String]?
 }
 
 open class NonRxSearchService: NonRxSearchServiceProtocol {
-    private let networking = NonRxNetworking()
+  private let networking = NonRxNetworking()
     
     /**
      # fetchSearchCafe
@@ -39,23 +39,24 @@ open class NonRxSearchService: NonRxSearchServiceProtocol {
      - Returns: SearchResult
      - Note: 네트워크 통신을 통해 카페 검색 정보를 받아옴.
     */
-    func fetchSearchCafe(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, MoyaError?)->()) {
-        networking.session.cancelAllRequests()
-        networking.request(.searchCafe(query: searchText, sort: sort.value, page: page)) { result in
-            switch result {
-                case let .success(moyaResponse):
-                  let statusCode = moyaResponse.statusCode
-                  if statusCode == 200 {
-                    let data = moyaResponse.data.decode(SearchResult.self)
-                    completion(data, nil)
-                  }
-                  break;
-                case let .failure(error):
-                  completion(nil, error)
-                  break;
-                }
-        }
+  func fetchSearchCafe(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, MoyaError?)->()) {
+    networking.session.cancelAllRequests()
+    defaultAddSearchHistory(searchText)
+    networking.request(.searchCafe(query: searchText, sort: sort.value, page: page)) { result in
+      switch result {
+        case let .success(moyaResponse):
+          let statusCode = moyaResponse.statusCode
+          if statusCode == 200 {
+            let data = moyaResponse.data.decode(SearchResult.self)
+            completion(data, nil)
+          }
+          break;
+        case let .failure(error):
+          completion(nil, error)
+          break;
+      }
     }
+  }
     
     /**
      # fetchSearchBlog
@@ -68,23 +69,24 @@ open class NonRxSearchService: NonRxSearchServiceProtocol {
      - Returns: Single<SearchResult>
      - Note: 네트워크 통신을 통해 블로그 검색 정보를 받아옴.
     */
-    func fetchSearchBlog(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, MoyaError?)->()) {
-        networking.session.cancelAllRequests()
-      networking.request(.searchBlog(query: searchText, sort: sort.value, page: page)) { result in
-          switch result {
-              case let .success(moyaResponse):
-                let statusCode = moyaResponse.statusCode
-                if statusCode == 200 {
-                  let data = moyaResponse.data.decode(SearchResult.self)
-                  completion(data, nil)
-                }
-                break;
-              case let .failure(error):
-                completion(nil, error)
-                break;
-              }
+  func fetchSearchBlog(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, MoyaError?)->()) {
+    networking.session.cancelAllRequests()
+    defaultAddSearchHistory(searchText)
+    networking.request(.searchBlog(query: searchText, sort: sort.value, page: page)) { result in
+      switch result {
+        case let .success(moyaResponse):
+          let statusCode = moyaResponse.statusCode
+          if statusCode == 200 {
+            let data = moyaResponse.data.decode(SearchResult.self)
+            completion(data, nil)
+          }
+          break;
+        case let .failure(error):
+          completion(nil, error)
+          break;
       }
     }
+  }
     
     /**
      # defaultSearchHistory
@@ -94,9 +96,9 @@ open class NonRxSearchService: NonRxSearchServiceProtocol {
      - Returns: Single<[String]?>
      - Note: UserDefault에 보관된 검색 히스토리
     */
-    func defaultSearchHistory() -> [String]? {
-        return Defaults.serachHistory
-    }
+  func defaultSearchHistory() -> [String]? {
+    return Defaults.serachHistory
+  }
     
     /**
      # defaultAddSearchHistory
@@ -106,14 +108,14 @@ open class NonRxSearchService: NonRxSearchServiceProtocol {
      - Returns: Single<[String]?>
      - Note: UserDefault에  검색 히스토리 더하기
     */
-    func defaultAddSearchHistory(_ searchText: String) {
-        // 중복 제거 및 더하기
-        if var historyArray = Defaults.serachHistory {
-            historyArray.append(searchText)
-            let history = Set(historyArray)
-            Defaults.serachHistory = Array(history)
-        } else {
-            Defaults.serachHistory = [searchText]
-        }
+  func defaultAddSearchHistory(_ searchText: String) {
+    // 중복 제거 및 더하기
+    if var historyArray = Defaults.serachHistory {
+      historyArray.append(searchText)
+      let history = Set(historyArray)
+      Defaults.serachHistory = Array(history)
+    } else {
+        Defaults.serachHistory = [searchText]
     }
+  }
 }
