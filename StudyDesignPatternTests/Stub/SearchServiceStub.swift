@@ -11,11 +11,7 @@ import SwiftyUserDefaults
 @testable import StudyDesignPattern
 
 struct SearchServiceStub: SearchServiceProtocol {
-  func defaultSearchHistory() -> Single<[String]?> {
-    return Single.just(Defaults.serachHistory)
-  }
-  
-  func fetchSearchCafe(_ searchText: String, _ sort: SearchSort, _ page: Int) -> Single<SearchResult> {
+  func searchCafe(searchText: String, sort: SearchSort, page: Int) -> Observable<SearchResult> {
     return Single<SearchResult>.create { observer in
       if let dummy = SearchCafeDummy.jsonData {
         observer(.success(dummy))
@@ -23,10 +19,10 @@ struct SearchServiceStub: SearchServiceProtocol {
         observer(.error(APIError.noData))
       }
       return Disposables.create()
-    }
+    }.asObservable()
   }
   
-  func fetchSearchBlog(_ searchText: String, _ sort: SearchSort, _ page: Int) -> Single<SearchResult> {
+  func searchBlog(searchText: String, sort: SearchSort, page: Int) -> Observable<SearchResult> {
     return Single<SearchResult>.create { observer in
       if let dummy = SearchBlogDummy.jsonData {
         observer(.success(dummy))
@@ -34,6 +30,10 @@ struct SearchServiceStub: SearchServiceProtocol {
         observer(.error(APIError.noData))
       }
       return Disposables.create()
-    }
+    }.asObservable()
+  }
+  
+  func searchHistory() -> Observable<[String]?> {
+    return Observable.just(Defaults.serachHistory)
   }
 }

@@ -23,7 +23,7 @@ extension AppDependency {
     let searchService = SearchService()
     let nonRxSearchService = NonRxSearchService()
     let service = AppService(searchService: searchService)
-    let nonRxService = NonRxAppService(nonRxSearchService: nonRxSearchService)
+    let nonRxService = NonRxAppService(searchService: nonRxSearchService)
     let reactorKitListReactor = ReactorKitListReactor(withService: service)
 //    let reactorKitDetailReactor = ReactorKitDetailReactor(selectedModel: service, index: <#Int#>)
     let mvcListViewController = MVCListViewController(service: nonRxService)

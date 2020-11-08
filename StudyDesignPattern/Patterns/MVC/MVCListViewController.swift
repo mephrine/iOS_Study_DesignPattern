@@ -79,7 +79,7 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
   func requestSearch(searchText: String, filterState: SearchFilter, sortState: SearchSort, _ completion: @escaping ([SearchItem]?)-> ()) {
     // Blog
     if (filterState == .blog) {
-      return service.nonRxSearchService.fetchSearchBlog(searchText, sortState, page) { (response, error) in
+      return service.searchService.fetchSearchBlog(searchText, sortState, page) { (response, error) in
         if let result = response {
           self.page += 1
           self.totalPage += response?.totalCount ?? 0
@@ -91,7 +91,7 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
     }
     // Cafe
     else if (filterState == .cafe) {
-      return service.nonRxSearchService.fetchSearchCafe(searchText, sortState, page) { (response, error) in
+      return service.searchService.fetchSearchCafe(searchText, sortState, page) { (response, error) in
         if let result = response {
           self.page += 1
           self.totalPage += response?.totalCount ?? 0
@@ -112,7 +112,7 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
       group.enter()
         queue.async(group: group) { [weak self] in
             guard let self = self else { return }
-            self.service.nonRxSearchService.fetchSearchBlog(searchText, sortState, self.page) { (response, error) in
+            self.service.searchService.fetchSearchBlog(searchText, sortState, self.page) { (response, error) in
               if let result = response {
                 searchBlogResult = result
               }
@@ -123,7 +123,7 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
       group.enter()
         queue.async(group: group) { [weak self] in
             guard let self = self else { return }
-            self.service.nonRxSearchService.fetchSearchCafe(searchText, sortState, self.page) { (response, error) in
+            self.service.searchService.fetchSearchCafe(searchText, sortState, self.page) { (response, error) in
               if let result = response {
                 searchCafeResult = result
               }
@@ -355,7 +355,7 @@ extension MVCListViewController: UITableViewDelegate, UITableViewDataSource {
     if tableView === searchTableView {
       return searchItems.count
     } else {
-      return service.nonRxSearchService.defaultSearchHistory()?.count ?? 0
+      return service.searchService.defaultSearchHistory()?.count ?? 0
     }
   }
     
@@ -373,7 +373,7 @@ extension MVCListViewController: UITableViewDelegate, UITableViewDataSource {
       let cell: SearchHistoryCell = tableView.dequeueReusableCell(for: indexPath)
       
       //indexPath
-      if let model = service.nonRxSearchService.defaultSearchHistory()?[indexPath.row] {
+      if let model = service.searchService.defaultSearchHistory()?[indexPath.row] {
         cell.configure(item: model)
       }
       
@@ -388,7 +388,7 @@ extension MVCListViewController: UITableViewDelegate, UITableViewDataSource {
 
       navigationController?.pushViewController(detailViewController, animated: true)
     } else {
-      if let model = service.nonRxSearchService.defaultSearchHistory()?[indexPath.row] {
+      if let model = service.searchService.defaultSearchHistory()?[indexPath.row] {
         searchBar.text = model
         clearListAndSearch()
       }

@@ -69,8 +69,8 @@ class ReactorKitTest: QuickSpec {
       context("Check API for result value") {
         it("Check first item name is correct") {
           do {
-            let searchBlog = try service.fetchSearchCafe("", .accuracy, 1).toBlocking().first()
-            expect(searchBlog?.items?.first?.name!).to(equal("＊여성시대＊ 차분한 20대들의 알흠다운 공간"), description: "firstName is 여성시대.")
+            let searchBlog = try service.searchService.searchCafe(searchText: "", sort: .accuracy, page: 1).toBlocking().first()
+            expect(searchBlog?.items?.first?.name).to(equal("＊여성시대＊ 차분한 20대들의 알흠다운 공간"), description: "firstName is 여성시대.")
           } catch let error {
             print("error### : \(error)")
             fail("searchUser blocking error")
@@ -84,8 +84,8 @@ class ReactorKitTest: QuickSpec {
       context("Check API for result value") {
         it("Check first item name is correct") {
           do {
-            let searchBlog = try service.fetchSearchBlog("", .accuracy, 1).toBlocking().first()
-            expect(searchBlog?.items?.first?.name!).to(equal("핑크빛 장미"), description: "firstName is 여성시대.")
+            let searchBlog = try service.searchService.searchBlog(searchText: "", sort: .accuracy, page: 1).toBlocking().first()
+            expect(searchBlog?.items?.first?.name).to(equal("핑크빛 장미"), description: "firstName is 여성시대.")
           } catch let error {
             print("error### : \(error)")
             fail("searchUser blocking error")

@@ -20,5 +20,5 @@ struct AppService: HasSearchService {
 }
 
 struct NonRxAppService: HasNonRxSearchService{
-  let nonRxSearchService: NonRxSearchService
+  let searchService: NonRxSearchServiceProtocol
 }

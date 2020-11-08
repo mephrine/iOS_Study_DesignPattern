@@ -10,7 +10,7 @@ import SwiftyUserDefaults
 import Moya
 
 protocol HasNonRxSearchService {
-    var nonRxSearchService: NonRxSearchService { get }
+    var searchService: NonRxSearchServiceProtocol { get }
 }
 
 /**
