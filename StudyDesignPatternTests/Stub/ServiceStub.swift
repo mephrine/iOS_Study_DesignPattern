@@ -6,3 +6,21 @@
 //
 
 import Foundation
+import Moya
+@testable import Pods_StudyDesignPattern
+
+class ServcieStub: NonRxSearchServiceProtocol {
+  func fetchSearchCafe(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, MoyaError?) -> ()) {
+    
+  }
+  
+  func fetchSearchBlog(_ searchText: String, _ sort: SearchSort, _ page: Int, _ completion: @escaping (SearchResult?, MoyaError?) -> ()) {
+    
+  }
+  
+  func defaultSearchHistory() -> [String]? {
+    return ["search"]
+  }
+  
+  
+}

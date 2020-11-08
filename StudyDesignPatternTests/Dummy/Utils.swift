@@ -6,15 +6,11 @@
 //
 
 import Foundation
-//
-//func jsonStringToData<T>(_ jsonString: String) -> T? {
-//    if let data = jsonString.data(using: .utf8) {
-//        do {
-//            let json = try JSON(data: data)
-//
-//            let returnData = json.to(type: T.self) as? T
-//            return returnData
-//        } catch {}
-//    }
-//    return nil
-//}
+
+
+func jsonStringToData<T: Codable>(_ jsonString: String) -> T? {
+    if let data = jsonString.data(using: .utf8) {
+        return data.decode(T.self)
+    }
+    return nil
+}
