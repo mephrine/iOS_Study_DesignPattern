@@ -19,6 +19,7 @@ final class MVCListViewController: BaseListViewController {
   
   // 페이징
   var page = 1
+  var totalPage = PAGE_COUNT
     
   //상태 관리
   var filterState = SearchFilter.all
@@ -88,10 +89,14 @@ final class MVCListViewController: BaseListViewController {
         guard let self = self else { return }
         if (response?.items?.count ?? 0) > 0 {
           self.page += 1
+          self.totalPage += response?.totalCount ?? 0
           if let searchWord =  self.searchBar.text {
             self.recentlySearchWord = searchWord
           }
+          
           self.searchItems += response?.items ?? []
+          self.noDataView.isHidden = self.searchItems.count > 0
+          
           self.searchTableView.reloadData()
         }
       }
@@ -109,28 +114,41 @@ final class MVCListViewController: BaseListViewController {
   // MARK: - Override
   override func selectActionSort(selected: SearchSort) {
     sortState = selected
-    page = 1
-    searchText()
+    clearListAndSearch()
   }
   
   override func selectFilter(selected: SearchFilter) {
     filterState = selected
-    page = 1
-    searchText()
+    clearListAndSearch()
+  }
+  
+  // MARK: - User Functions
+  func chkEnablePaging() -> Bool {
+    if (page - 1) * PAGE_COUNT < totalPage {
+        return true
+    }
+    return false
+  }
+  
+  func clearListAndSearch() {
+    self.page = 1
+    self.totalPage = PAGE_COUNT
+    self.searchItems.removeAll()
+    self.searchText()
   }
 }
 
 // MARK: - TapGesture Action
 extension MVCListViewController {
   @objc func tapSearchButton() {
-    searchText()
+    clearListAndSearch()
   }
 }
 
 // MARK: - UISearchBarDelegate
 extension MVCListViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    searchText()
+    clearListAndSearch()
   }
 }
 
@@ -156,5 +174,15 @@ extension MVCListViewController: UITableViewDelegate, UITableViewDataSource {
     let detailViewController = MVCDetailViewController(selectedModel: model)
 
     navigationController?.pushViewController(detailViewController, animated: true)
+  }
+  
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    if chkEnablePaging() {
+      let lastSectionIndex = self.searchTableView.numberOfSections - 1
+      let lastRowIndex = self.searchTableView.numberOfRows(inSection: lastSectionIndex) - 1
+      if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
+          searchText()
+      }
+    }
   }
 }

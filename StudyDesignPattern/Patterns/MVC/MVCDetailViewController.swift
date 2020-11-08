@@ -28,7 +28,7 @@ class MVCDetailViewController: BaseDetailViewController {
   override func initView() {
     super.initView()
     
-    if let urlString = model.url, let url = URL(string:urlString) {
+    if let urlString = model.thumbnail, let url = URL(string:urlString) {
       thumnailView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.3))])
     }
     
@@ -37,5 +37,9 @@ class MVCDetailViewController: BaseDetailViewController {
     contentsLabel.attributedText = model.contents.htmlAttributedString(font: Font.contentLabelTitle)
     dateTimeLabel.text = model.datetime
     urlLabel.text = model.url
+  }
+  
+  override func clickToBackButton() {
+    self.navigationController?.popViewController(animated: true)
   }
 }
