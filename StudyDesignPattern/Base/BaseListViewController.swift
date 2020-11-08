@@ -100,6 +100,7 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
     // MARK: - View
     // searchBar
     let searchBar = UISearchBar(frame: .zero).then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.placeholder = "STR_SEARCH_PLACE_HOLDER".localized
         $0.searchBarStyle = .prominent
         $0.sizeToFit()
@@ -111,6 +112,7 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
     }
     
     let searchButton = UIButton(frame: .zero).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
       $0.backgroundColor = Color.searchBgColor
         $0.setTitleColor(.white, for: .normal)
       $0.titleLabel?.font = Font.buttonTitle
@@ -120,6 +122,7 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
     
     // history
     lazy var historyTableView = UITableView(frame: .zero, style: .plain).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
         $0.register(cellType: SearchHistoryCell.self)
       $0.contentInset = UIEdgeInsets(top: Metric.historyVerticalEdge, left: 0, bottom: Metric.historyVerticalEdge, right: 0)
         $0.rowHeight = 40
@@ -131,15 +134,18 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
     }
     
     lazy var historyView = UIView(frame: .zero).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
       $0.backgroundColor = Color.historyBgColor
     }
     
     // headerView
     let headerView = UIView(frame: .zero).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .white
     }
     
     let filterButton = UIButton(frame: .zero).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .white
         $0.setTitleColor(.black, for: .normal)
         $0.contentHorizontalAlignment = .left
@@ -150,6 +156,7 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
     
     // filter view
     lazy var filterStackView = UIStackView(frame: .zero).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
         $0.axis = .vertical
         $0.alignment = .fill
         $0.distribution = .fill
@@ -158,14 +165,17 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
       $0.layoutMargins = UIEdgeInsets(top: Metric.filterStackViewVeritcalEdge, left: Metric.filterStackViewHorizontalEdge, bottom: Metric.filterStackViewVeritcalEdge, right: Metric.filterStackViewHorizontalEdge)
         
         let lineView = UIView(frame: .zero).then {
+          $0.translatesAutoresizingMaskIntoConstraints = false
           $0.backgroundColor = Color.bgColor
         }
         
         let lineView2 = UIView(frame: .zero).then {
+          $0.translatesAutoresizingMaskIntoConstraints = false
             $0.backgroundColor = Color.bgColor
         }
         
         let filterButton1 = UIButton(frame: .zero).then {
+          $0.translatesAutoresizingMaskIntoConstraints = false
             $0.backgroundColor = .white
             $0.setTitleColor(.black, for: .normal)
             $0.contentHorizontalAlignment = .left
@@ -180,6 +190,7 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
         }
         
         let filterButton2 = UIButton(frame: .zero).then {
+          $0.translatesAutoresizingMaskIntoConstraints = false
             $0.backgroundColor = .white
             $0.setTitleColor(.black, for: .normal)
             $0.contentHorizontalAlignment = .left
@@ -216,6 +227,7 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
     
     // sort
     let sortButton = UIButton(frame: .zero).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
         $0.setImage(UIImage(named: "icon_search_filter"), for: .normal)
       $0.contentEdgeInsets = UIEdgeInsets(top: Metric.sortButtonEdge, left: Metric.sortButtonEdge, bottom: Metric.sortButtonEdge, right: Metric.sortButtonEdge)
@@ -233,11 +245,13 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
     }
     
     let headerBottomLineView = UIView(frame: .zero).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
       $0.backgroundColor = Color.bgColor
     }
     
     // tableview
     lazy var searchTableView = UITableView(frame: .zero, style: .plain).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         $0.rowHeight = 115
         $0.separatorStyle = .none
@@ -250,10 +264,12 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
     
     // No Data
     let noDataView = UIView(frame: .zero).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .white
     }
     
     let noDataLabel = UILabel(frame: .zero).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .clear
         $0.textColor = .black
         $0.text = "STR_SEARCH_NO_INPUT".localized
@@ -263,6 +279,7 @@ class BaseListViewController: BaseViewController, SelectSortProtocol {
     }
     
     lazy var loadingView =  UIActivityIndicatorView(style: .gray).then {
+      $0.translatesAutoresizingMaskIntoConstraints = false
         $0.frame = CGRect(x: 0, y: 0, width: self.searchTableView.bounds.width, height: 44)
     }
     
