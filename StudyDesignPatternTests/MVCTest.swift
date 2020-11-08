@@ -14,7 +14,7 @@ import RxCocoa
 import RxOptional
 @testable import StudyDesignPattern
 
-class StudyDesignPatternTests: QuickSpec {
+class MVCTest: QuickSpec {
     override func spec() {
         var service: AppService!
         var reactor: SearchListViewModel!
@@ -63,9 +63,6 @@ class StudyDesignPatternTests: QuickSpec {
                 }
             }
         }
-
-
-
 
         describe("Request search API : cafe") {
             context("Check API for result value") {

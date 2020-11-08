@@ -15,7 +15,10 @@ import Foundation
  - Note: 앱에서 사용될 서비스를 관리하는 구조체
 */
 
-struct AppService: HasSearchService, HasNonRxSearchService {
-  let searchService: SearchService
+struct AppService: HasSearchService {
+  var searchService: SearchServiceProtocol
+}
+
+struct NonRxAppService: HasNonRxSearchService{
   let nonRxSearchService: NonRxSearchService
 }

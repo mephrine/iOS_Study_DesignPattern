@@ -26,7 +26,7 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
   var sortState = SearchSort.accuracy
     
   // MARK: - Constructor
-  init(service: AppService) {
+  init(service: NonRxAppService) {
     self.service = service
   }
     

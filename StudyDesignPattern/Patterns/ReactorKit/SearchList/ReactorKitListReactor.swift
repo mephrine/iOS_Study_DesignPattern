@@ -28,9 +28,9 @@ final class ReactorKitListReactor: Reactor, Stepper {
     var isLoading = PublishSubject<Bool>()         // 로딩바 관리
     var isSearchReload = PublishSubject<Bool>()    // 검색어 변경으로 인한 리로드
 
-    init(withService service: AppService) {
-        self.service = service
-    }
+  init(withService service: AppService) {
+    self.service = service
+  }
 
     /**
      # (E) Action
@@ -109,7 +109,7 @@ final class ReactorKitListReactor: Reactor, Stepper {
             if !isFocusing {
                 return Observable.just(Mutation.historyList(list: []) )
             }
-            return service.searchService.rx.searchHistory()
+            return service.searchService.searchHistory()
                 .map { Mutation.historyList(list: $0 ?? []) }
         // 히스토리 내역 중 선택된 텍스트로 검색
         case .tapHistory(let selected):
@@ -119,23 +119,23 @@ final class ReactorKitListReactor: Reactor, Stepper {
             let textObservable = Observable.just(Mutation.searchText(text: selected))
 
             if currentState.filterState == .blog {
-                let requestObservable = service.searchService.rx.searchBlog(searchText: selected, sort: currentState.sortState, page: 1)
+                let requestObservable = service.searchService.searchBlog(searchText: selected, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchResult(list: $0)}
 
                 return .concat(textObservable, requestObservable)
             }
 
             else if currentState.filterState == .cafe {
-                let requestObservable = service.searchService.rx.searchCafe(searchText: selected, sort: currentState.sortState, page: 1)
+                let requestObservable = service.searchService.searchCafe(searchText: selected, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchResult(list: $0)}
 
                 return .concat(textObservable, requestObservable)
             }
             else {
                 // 25 / 25개씩 불러와서 정렬하고 25개만 끊어서 보여주기.
-                let requestBlogObservable = service.searchService.rx.searchBlog(searchText: selected, sort: currentState.sortState, page: 1)
+                let requestBlogObservable = service.searchService.searchBlog(searchText: selected, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchBlog(list: $0)}
-                let requestCafeObservable = service.searchService.rx.searchCafe(searchText: selected, sort: currentState.sortState, page: 1)
+                let requestCafeObservable = service.searchService.searchCafe(searchText: selected, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchCafe(list: $0)}
 
                 return .concat(textObservable, requestBlogObservable, requestCafeObservable)
@@ -145,23 +145,23 @@ final class ReactorKitListReactor: Reactor, Stepper {
             let textObservable = Observable.just(Mutation.searchText(text: searchText))
 
             if currentState.filterState == .blog {
-                let requestObservable = service.searchService.rx.searchBlog(searchText: searchText, sort: currentState.sortState, page: 1)
+                let requestObservable = service.searchService.searchBlog(searchText: searchText, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchResult(list: $0)}
 
                 return .concat(textObservable, requestObservable)
             }
 
             else if currentState.filterState == .cafe {
-                let requestObservable = service.searchService.rx.searchCafe(searchText: searchText, sort: currentState.sortState, page: 1)
+                let requestObservable = service.searchService.searchCafe(searchText: searchText, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchResult(list: $0)}
 
                 return .concat(textObservable, requestObservable)
             }
             else {
                 // 25 / 25개씩 불러와서 정렬하고 25개만 끊어서 보여주기.
-                let requestBlogObservable = service.searchService.rx.searchBlog(searchText: searchText, sort: currentState.sortState, page: 1)
+                let requestBlogObservable = service.searchService.searchBlog(searchText: searchText, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchBlog(list: $0)}
-                let requestCafeObservable = service.searchService.rx.searchCafe(searchText: searchText, sort: currentState.sortState, page: 1)
+                let requestCafeObservable = service.searchService.searchCafe(searchText: searchText, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchCafe(list: $0)}
 
                 return .concat(textObservable, requestBlogObservable, requestCafeObservable)
@@ -171,19 +171,19 @@ final class ReactorKitListReactor: Reactor, Stepper {
             self.isLoading.onNext(true)
 
             if currentState.filterState == .blog {
-                return service.searchService.rx.searchBlog(searchText: currentState.searchText, sort: currentState.sortState, page: currentState.page)
+                return service.searchService.searchBlog(searchText: currentState.searchText, sort: currentState.sortState, page: currentState.page)
                     .map{Mutation.loadMore(list: $0)}
             }
 
             else if currentState.filterState == .cafe {
-                return service.searchService.rx.searchCafe(searchText: currentState.searchText, sort: currentState.sortState, page: currentState.page)
+                return service.searchService.searchCafe(searchText: currentState.searchText, sort: currentState.sortState, page: currentState.page)
                     .map{Mutation.loadMore(list: $0)}
             }
             else {
                 // 25 / 25개씩 불러와서 정렬하고 25개만 끊어서 보여주기.
-                let requestBlogObservable = service.searchService.rx.searchBlog(searchText: currentState.searchText, sort: currentState.sortState, page: currentState.page)
+                let requestBlogObservable = service.searchService.searchBlog(searchText: currentState.searchText, sort: currentState.sortState, page: currentState.page)
                     .map{Mutation.searchBlog(list: $0)}
-                let requestCafeObservable = service.searchService.rx.searchCafe(searchText: currentState.searchText, sort: currentState.sortState, page: currentState.page)
+                let requestCafeObservable = service.searchService.searchCafe(searchText: currentState.searchText, sort: currentState.sortState, page: currentState.page)
                     .map{Mutation.loadMoreAll(list: $0)}
 
                 return .concat(requestBlogObservable, requestCafeObservable)
@@ -199,23 +199,23 @@ final class ReactorKitListReactor: Reactor, Stepper {
             let filterObservable = Observable.just(Mutation.changeFilter(selected: selectedFilter))
 
             if selectedFilter == .blog {
-                let requestObservable = service.searchService.rx.searchBlog(searchText: currentState.searchText, sort: currentState.sortState, page: 1)
+                let requestObservable = service.searchService.searchBlog(searchText: currentState.searchText, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchResult(list: $0)}
 
                 return .concat(filterObservable, requestObservable)
             }
 
             else if selectedFilter == .cafe {
-                let requestObservable = service.searchService.rx.searchCafe(searchText: currentState.searchText, sort: currentState.sortState, page: 1)
+                let requestObservable = service.searchService.searchCafe(searchText: currentState.searchText, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchResult(list: $0)}
 
                 return .concat(filterObservable, requestObservable)
             }
             else {
                 // 25 / 25개씩 불러와서 정렬하고 25개만 끊어서 보여주기.
-                let requestBlogObservable = service.searchService.rx.searchBlog(searchText: currentState.searchText, sort: currentState.sortState, page: 1)
+                let requestBlogObservable = service.searchService.searchBlog(searchText: currentState.searchText, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchBlog(list: $0)}
-                let requestCafeObservable = service.searchService.rx.searchCafe(searchText: currentState.searchText, sort: currentState.sortState, page: 1)
+                let requestCafeObservable = service.searchService.searchCafe(searchText: currentState.searchText, sort: currentState.sortState, page: 1)
                     .map{Mutation.searchCafe(list: $0)}
 
                 return .concat(filterObservable, requestBlogObservable, requestCafeObservable)
@@ -231,23 +231,23 @@ final class ReactorKitListReactor: Reactor, Stepper {
             let sortObservable = Observable.just(Mutation.changeSort(selected: selectedSort))
 
             if currentState.filterState == .blog {
-                let requestObservable = service.searchService.rx.searchBlog(searchText: currentState.searchText, sort: selectedSort, page: 1)
+                let requestObservable = service.searchService.searchBlog(searchText: currentState.searchText, sort: selectedSort, page: 1)
                     .map{Mutation.searchResult(list: $0)}
 
                 return .concat(sortObservable, requestObservable)
             }
 
             else if currentState.filterState == .cafe {
-                let requestObservable = service.searchService.rx.searchCafe(searchText: currentState.searchText, sort: selectedSort, page: 1)
+                let requestObservable = service.searchService.searchCafe(searchText: currentState.searchText, sort: selectedSort, page: 1)
                     .map{Mutation.searchResult(list: $0)}
 
                 return .concat(sortObservable, requestObservable)
             }
             else {
                 // 25 / 25개씩 불러와서 정렬하고 25개만 끊어서 보여주기.
-                let requestBlogObservable = service.searchService.rx.searchBlog(searchText: currentState.searchText, sort: selectedSort, page: 1)
+                let requestBlogObservable = service.searchService.searchBlog(searchText: currentState.searchText, sort: selectedSort, page: 1)
                     .map{Mutation.searchBlog(list: $0)}
-                let requestCafeObservable = service.searchService.rx.searchCafe(searchText: currentState.searchText, sort: selectedSort, page: 1)
+                let requestCafeObservable = service.searchService.searchCafe(searchText: currentState.searchText, sort: selectedSort, page: 1)
                     .map{Mutation.searchCafe(list: $0)}
 
                 return .concat(sortObservable, requestBlogObservable, requestCafeObservable)
@@ -325,8 +325,7 @@ final class ReactorKitListReactor: Reactor, Stepper {
             }
         // 검색한 텍스트
         case .searchText(let text):
-            self.service.searchService.defaultAddSearchHistory(text)
-            newState.searchText = text
+          newState.searchText = text
         // 검색한 페이지 수
         case .totalPage(let totalPage):
             newState.totalPage = totalPage
@@ -432,13 +431,13 @@ final class ReactorKitListReactor: Reactor, Stepper {
     func requestSearchObservable(searchText: String, sort: SearchSort, filter: SearchFilter, page: Int) -> Observable<SearchResult> {
         if filter == .all {
             // 25 / 25개씩 불러와서 정렬하고 25개만 끊어서 보여주기.
-            return service.searchService.rx.searchCafe(searchText: searchText, sort: sort, page: page).asObservable()
+            return service.searchService.searchCafe(searchText: searchText, sort: sort, page: page).asObservable()
         }
         else if filter == .cafe {
-            return service.searchService.rx.searchCafe(searchText: searchText, sort: sort, page: page).asObservable()
+            return service.searchService.searchCafe(searchText: searchText, sort: sort, page: page).asObservable()
         }
         else {
-            return service.searchService.rx.searchBlog(searchText: searchText, sort: sort, page: page).asObservable()
+            return service.searchService.searchBlog(searchText: searchText, sort: sort, page: page).asObservable()
         }
     }
 
