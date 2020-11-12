@@ -53,6 +53,7 @@ target 'StudyDesignPattern' do
     pod 'Nimble'
     pod 'RxTest'
     pod 'RxBlocking'
+    pod 'Stubber'
   end
   
 end
