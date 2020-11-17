@@ -79,10 +79,11 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
   func requestSearch(searchText: String, filterState: SearchFilter, sortState: SearchSort, _ completion: @escaping ([SearchItem]?)-> ()) {
     // Blog
     if (filterState == .blog) {
-      return service.searchService.fetchSearchBlog(searchText, sortState, page) { (response, error) in
+      return service.searchService.fetchSearchBlog(searchText, sortState, page) { [weak self] (response, error) in
+        guard let self = self else { return }
         if let result = response {
-          page += 1
-          totalPage += response?.totalCount ?? 0
+          self.page += 1
+          self.totalPage += response?.totalCount ?? 0
           completion(result.items)
           return
         }
@@ -91,10 +92,11 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
     }
     // Cafe
     else if (filterState == .cafe) {
-      return service.searchService.fetchSearchCafe(searchText, sortState, page) { (response, error) in
+      return service.searchService.fetchSearchCafe(searchText, sortState, page) { [weak self] (response, error) in
+        guard let self = self else { return }
         if let result = response {
-          page += 1
-          totalPage += response?.totalCount ?? 0
+          self.page += 1
+          self.totalPage += response?.totalCount ?? 0
           completion(result.items)
           return
         }
@@ -112,7 +114,7 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
       group.enter()
         queue.async(group: group) { [weak self] in
             guard let self = self else { return }
-            service.searchService.fetchSearchBlog(searchText, sortState, page) { (response, error) in
+          self.service.searchService.fetchSearchBlog(searchText, sortState, self.page) { (response, error) in
               if let result = response {
                 searchBlogResult = result
               }
@@ -123,7 +125,7 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
       group.enter()
         queue.async(group: group) { [weak self] in
             guard let self = self else { return }
-            service.searchService.fetchSearchCafe(searchText, sortState, page) { (response, error) in
+          self.service.searchService.fetchSearchCafe(searchText, sortState, self.page) { (response, error) in
               if let result = response {
                 searchCafeResult = result
               }
@@ -137,8 +139,8 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
         totalPage = min(totalPage, PAGE_COUNT * 2)
           
         let sortedList = (sortState == .accuracy) ?
-        divideSortText(list: (searchBlogResult?.items ?? []) , list2: (searchCafeResult?.items ?? [])) :
-        divideSortDateTime(list: (searchBlogResult?.items ?? []) , list2: (searchCafeResult?.items ?? []))
+          self.divideSortText(list: (searchBlogResult?.items ?? []) , list2: (searchCafeResult?.items ?? [])) :
+          self.divideSortDateTime(list: (searchBlogResult?.items ?? []) , list2: (searchCafeResult?.items ?? []))
           
         completion(sortedList)
       }
@@ -381,8 +383,12 @@ extension MVCListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if tableView === searchTableView {
-      let model = searchItems[indexPath.row]
+      var model = searchItems[indexPath.row]
       let detailViewController = MVCDetailViewController(selectedModel: model)
+      detailViewController.completion = {
+        model.isReading = $0
+        tableView.reloadData()
+      }
 
       navigationController?.pushViewController(detailViewController, animated: true)
     } else {

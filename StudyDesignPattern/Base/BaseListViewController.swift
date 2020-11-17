@@ -232,10 +232,10 @@ class BaseListViewController: BaseViewController {
     
     lazy var sortActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet).then {
         $0.addAction(UIAlertAction(title: SearchSort.accuracy.rawValue, style: .default, handler: { result in
-            selectActionSort(selected: SearchSort.accuracy)
+          self.selectActionSort(selected: SearchSort.accuracy)
         }))
         $0.addAction(UIAlertAction(title: SearchSort.recency.rawValue, style: .default, handler: { result in
-            selectActionSort(selected: SearchSort.recency)
+          self.selectActionSort(selected: SearchSort.recency)
         }))
         
         $0.addAction(UIAlertAction(title: "STR_CANCEL".localized, style: .cancel, handler: nil))
@@ -442,13 +442,13 @@ class BaseListViewController: BaseViewController {
           historyView.alpha = 0
           view.layoutIfNeeded()
           
-          UIView.animate(withDuration: 0.3) {
-              historyView.alpha = 1
+          UIView.animate(withDuration: 0.3) {[weak self] in
+            self?.historyView.alpha = 1
           }
           
       } else {
-          UIView.animate(withDuration: 0.3, animations: {
-              historyView.alpha = 0
+          UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            self?.historyView.alpha = 0
           })
       }
   }
@@ -488,8 +488,8 @@ class BaseListViewController: BaseViewController {
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
                 self?.filterStackView.alpha = 0
             }) { completion in
-                filterStackView.snp.removeConstraints()
-                filterStackView.removeFromSuperview()
+              self.filterStackView.snp.removeConstraints()
+              self.filterStackView.removeFromSuperview()
             }
         }
     }

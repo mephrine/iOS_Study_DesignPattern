@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   init(dependency: AppDependency) {
-    dependency = dependency
+    self.dependency = dependency
     super.init()
   }
 

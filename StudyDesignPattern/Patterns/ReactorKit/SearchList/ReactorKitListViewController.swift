@@ -97,7 +97,7 @@ final class ReactorKitListViewController: BaseListViewController, View {
     
     // searchBar에 텍스트 변경 옵션이 일어날 경우
     Observable.merge(searchBar.rx.searchButtonClicked.map{ _ in }, searchButton.rx.tap.map{ _ in })
-        .map{ searchBar.text }
+      .map{ self.searchBar.text }
         .map{ $0?.trimSide }
         .asDriver(onErrorJustReturn: "")
         .filterNil()
