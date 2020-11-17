@@ -32,7 +32,7 @@ final class ReactorKitDetailViewController: BaseDetailViewController, View {
 
     // MARK: - UI
     override func initView() {
-        
+//      urlLabel.attributedText = NSAttributedString.init(string: )
     }
 
   // MARK: - Bind

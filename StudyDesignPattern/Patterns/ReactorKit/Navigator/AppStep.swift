@@ -26,5 +26,6 @@ enum AppStep: Step {
     
     // MARK: - Search Detail
     case goBackToSearchList(row: Int?)                         // 검색 리스트 화면으로 되돌아가기
+  case clickURL(url: URL)                               // SFSafariViewController present로 띄우기
 }
 

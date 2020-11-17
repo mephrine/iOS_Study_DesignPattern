@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import SafariServices
 
 class MVCDetailViewController: BaseDetailViewController {
   fileprivate struct Font {
@@ -14,7 +15,10 @@ class MVCDetailViewController: BaseDetailViewController {
     static let contentLabelTitle = UIFont.systemFont(ofSize: 15)
   }
   
-  let model: SearchItem
+  private let model: SearchItem
+  
+  private var isSelected: Bool = false
+  var completion: ((Bool) -> ())?
   
   init(selectedModel: SearchItem) {
     model = selectedModel
@@ -42,6 +46,14 @@ class MVCDetailViewController: BaseDetailViewController {
   }
   
   override func clickToBackButton() {
+    completion?(isSelected)
     navigationController?.popViewController(animated: true)
+  }
+  
+  private func clickURL(urlString: String) {
+    if let url = URL(string: urlString) {
+      isSelected = true
+      present(SFSafariViewController(url: url), animated: true, completion: nil)
+    }
   }
 }

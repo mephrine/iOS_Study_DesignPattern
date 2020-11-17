@@ -50,6 +50,8 @@ class AppFlow: Flow {
             return goSearchDetail(model: model, row: row)
         case .returnDetailToList(let row):
             return returnDetailToList(row: row)
+        case .clickURL(let url):
+          return presentSFSafariViewController(url: url)
         default:
             return .none
         }
@@ -82,6 +84,23 @@ class AppFlow: Flow {
         }
         return .none
     }
+  
+  /**
+   # showSFVC
+   - Author: shan
+   - Date: 20.03.17
+   - Parameters:
+      - url : URL 타입 링크
+   - Returns: FlowContributors
+   - Note: SafariVC로 링크 실행.
+   */
+  private func presentSFSafariViewController(url: URL) -> FlowContributors {
+      let currentVC = self.rootViewController.visibleViewController
+      let sfVC = SFSafariViewController(url: url)
+      currentVC?.present(sfVC, animated: true, completion: nil)
+      
+      return .none
+  }
 }
 
 /**
