@@ -81,8 +81,8 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
     if (filterState == .blog) {
       return service.searchService.fetchSearchBlog(searchText, sortState, page) { (response, error) in
         if let result = response {
-          self.page += 1
-          self.totalPage += response?.totalCount ?? 0
+          page += 1
+          totalPage += response?.totalCount ?? 0
           completion(result.items)
           return
         }
@@ -93,8 +93,8 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
     else if (filterState == .cafe) {
       return service.searchService.fetchSearchCafe(searchText, sortState, page) { (response, error) in
         if let result = response {
-          self.page += 1
-          self.totalPage += response?.totalCount ?? 0
+          page += 1
+          totalPage += response?.totalCount ?? 0
           completion(result.items)
           return
         }
@@ -112,7 +112,7 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
       group.enter()
         queue.async(group: group) { [weak self] in
             guard let self = self else { return }
-            self.service.searchService.fetchSearchBlog(searchText, sortState, self.page) { (response, error) in
+            service.searchService.fetchSearchBlog(searchText, sortState, page) { (response, error) in
               if let result = response {
                 searchBlogResult = result
               }
@@ -123,7 +123,7 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
       group.enter()
         queue.async(group: group) { [weak self] in
             guard let self = self else { return }
-            self.service.searchService.fetchSearchCafe(searchText, sortState, self.page) { (response, error) in
+            service.searchService.fetchSearchCafe(searchText, sortState, page) { (response, error) in
               if let result = response {
                 searchCafeResult = result
               }
@@ -134,11 +134,11 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
       group.notify(queue: queue) {
         totalPage = (searchBlogResult?.totalCount ?? 0) + (searchCafeResult?.totalCount ?? 0)
           
-        self.totalPage = min(totalPage, PAGE_COUNT * 2)
+        totalPage = min(totalPage, PAGE_COUNT * 2)
           
         let sortedList = (sortState == .accuracy) ?
-        self.divideSortText(list: (searchBlogResult?.items ?? []) , list2: (searchCafeResult?.items ?? [])) :
-        self.divideSortDateTime(list: (searchBlogResult?.items ?? []) , list2: (searchCafeResult?.items ?? []))
+        divideSortText(list: (searchBlogResult?.items ?? []) , list2: (searchCafeResult?.items ?? [])) :
+        divideSortDateTime(list: (searchBlogResult?.items ?? []) , list2: (searchCafeResult?.items ?? []))
           
         completion(sortedList)
       }
@@ -186,11 +186,11 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
   }
   
   func clearListAndSearch() {
-    self.page = 1
-    self.totalPage = PAGE_COUNT
-    self.searchItems.removeAll()
-    self.recentlySearchWord = ""
-    self.searchText()
+    page = 1
+    totalPage = PAGE_COUNT
+    searchItems.removeAll()
+    recentlySearchWord = ""
+    searchText()
   }
   
   /**
@@ -398,8 +398,8 @@ extension MVCListViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if tableView === searchTableView {
       if chkEnablePaging() {
-        let lastSectionIndex = self.searchTableView.numberOfSections - 1
-        let lastRowIndex = self.searchTableView.numberOfRows(inSection: lastSectionIndex) - 1
+        let lastSectionIndex = searchTableView.numberOfSections - 1
+        let lastRowIndex = searchTableView.numberOfRows(inSection: lastSectionIndex) - 1
         log.d("test1 : \(indexPath.section ==  lastSectionIndex)")
         log.d("test2 : \(indexPath.row == lastRowIndex)")
         if (indexPath.section ==  lastSectionIndex) && (indexPath.row == lastRowIndex) {

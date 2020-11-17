@@ -53,20 +53,19 @@ final class SearchHistoryCell: UITableViewCell, Reusable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.addSubview(self.historyLabel)
-        self.addSubview(lineView)
-        self.historyLabel.snp.makeConstraints { [weak self] in
-            guard let self = self else { return }
+        addSubview(historyLabel)
+        addSubview(lineView)
+        historyLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.left.equalTo(self.snp.left).offset(20)
-            $0.right.equalTo(self.snp.right).offset(-20)
+            $0.left.equalTo(snp.left).offset(20)
+            $0.right.equalTo(snp.right).offset(-20)
         }
-        self.lineView.snp.makeConstraints {
+        lineView.snp.makeConstraints {
             $0.left.right.bottom.equalToSuperview()
             $0.height.equalTo(1)
         }
         
-        self.selectionStyle = .none
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
@@ -83,7 +82,7 @@ final class SearchHistoryCell: UITableViewCell, Reusable {
      - Note: 검색 히스토리 String 적용
     */
     func configure(item: String) {
-        self.historyLabel.text = item
+        historyLabel.text = item
     }
 }
 

@@ -27,7 +27,7 @@ final class ReactorKitDetailReactor: Stepper, Reactor {
     let index: Int
     
     init(selectedModel: SearchItem, index: Int) {
-        self.model = selectedModel
+        model = selectedModel
         self.index = index
     }
     

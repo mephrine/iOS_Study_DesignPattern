@@ -34,13 +34,13 @@ final class SearchResultCell: UITableViewCell, NibReusable {
      - Note: Cell Model 정보를 Cell에 구성
     */
     func configure(model: SearchResultCellModel) {
-        self.thumbnailView.kf.setImage(with: model.thumbnailURL, placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.3))])
-        self.typeBG.backgroundColor = model.typeBGColor
-        self.typeLabel.text = model.type
-        self.nameLabel.text = model.name
-        self.titleLabel.attributedText = model.title
-        self.dateTimeLabel.text = model.dateTime
-        self.dimView.isHidden = !model.isReading
+        thumbnailView.kf.setImage(with: model.thumbnailURL, placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.3))])
+        typeBG.backgroundColor = model.typeBGColor
+        typeLabel.text = model.type
+        nameLabel.text = model.name
+        titleLabel.attributedText = model.title
+        dateTimeLabel.text = model.dateTime
+        dimView.isHidden = !model.isReading
     }
 }
 

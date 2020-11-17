@@ -60,7 +60,7 @@ final class ReactorKitListViewController: BaseListViewController, View {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
   
   override func initView() {
@@ -79,7 +79,7 @@ final class ReactorKitListViewController: BaseListViewController, View {
             .disposed(by: disposeBag)
         
         // 히스토리뷰 항목 선택했을 경우
-        self.historyTableView.rx.modelSelected(String.self)
+        historyTableView.rx.modelSelected(String.self)
             .throttle(.milliseconds(300), latest: false, scheduler: Schedulers.main)
             .do(onNext:{ [weak self] in
                 self?.manageHistoryView(false)
@@ -91,8 +91,8 @@ final class ReactorKitListViewController: BaseListViewController, View {
             .disposed(by: disposeBag)
         
         // searchBar에 텍스트 변경 옵션이 일어날 경우
-        Observable.merge(self.searchBar.rx.searchButtonClicked.map{ _ in }, self.searchButton.rx.tap.map{ _ in })
-            .map{ self.searchBar.text }
+        Observable.merge(searchBar.rx.searchButtonClicked.map{ _ in }, searchButton.rx.tap.map{ _ in })
+            .map{ searchBar.text }
             .map{ $0?.trimSide }
             .asDriver(onErrorJustReturn: "")
             .filterNil()
@@ -107,8 +107,8 @@ final class ReactorKitListViewController: BaseListViewController, View {
             .disposed(by: disposeBag)
         
         // 필터 스택 뷰
-        if let filterButton1 = self.filterStackView.arrangedSubviews.filter({ $0.tag == 901 }).first as? UIButton,
-            let filterButton2 = self.filterStackView.arrangedSubviews.filter({ $0.tag == 902 }).first as? UIButton {
+        if let filterButton1 = filterStackView.arrangedSubviews.filter({ $0.tag == 901 }).first as? UIButton,
+            let filterButton2 = filterStackView.arrangedSubviews.filter({ $0.tag == 902 }).first as? UIButton {
             filterButton1.rx.tap
                 .do(onNext: { [weak self] in
                     self?.hideFilterView()
@@ -152,7 +152,7 @@ final class ReactorKitListViewController: BaseListViewController, View {
         
         
         // 항목 선택했을 경우
-        self.searchTableView.rx.modelSelected(SearchItem.self)
+        searchTableView.rx.modelSelected(SearchItem.self)
             .throttle(.milliseconds(300), latest: false, scheduler: Schedulers.main)
             .map { Reactor.Action.selectList(selected: $0) }
             .bind(to: reactor.action)
@@ -163,7 +163,7 @@ final class ReactorKitListViewController: BaseListViewController, View {
         reactor.state
             .map{ $0.resultList }
             .observeOn(Schedulers.main)
-            .bind(to: self.searchTableView.rx.items(dataSource: dataSource))
+            .bind(to: searchTableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
         reactor.state
@@ -172,7 +172,7 @@ final class ReactorKitListViewController: BaseListViewController, View {
                 self?.manageHistoryView(!$0.isEmpty)
             })
             .observeOn(Schedulers.main)
-            .bind(to: self.historyTableView.rx.items(dataSource: historyDataSource))
+            .bind(to: historyTableView.rx.items(dataSource: historyDataSource))
             .disposed(by: disposeBag)
         
         // 데이터가 없거나 SearchBar 검색어가 비어있는 경우
@@ -214,7 +214,7 @@ final class ReactorKitListViewController: BaseListViewController, View {
         
         // e.g.
         // 마지막 Section의 마지막 Row가 보여질 경우 다음 페이지 데이터 불러오기
-        self.searchTableView.rx.willDisplayCell
+        searchTableView.rx.willDisplayCell
             .filter{ _ in reactor.chkEnablePaging() }
             .subscribe(onNext: { [weak self] cell, indexPath in
                 guard let self = self else { return }

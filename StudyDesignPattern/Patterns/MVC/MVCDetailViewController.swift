@@ -38,10 +38,10 @@ class MVCDetailViewController: BaseDetailViewController {
     dateTimeLabel.text = model.datetime
     urlLabel.text = model.url
     
-    self.navigationItem.title = model.name
+    navigationItem.title = model.name
   }
   
   override func clickToBackButton() {
-    self.navigationController?.popViewController(animated: true)
+    navigationController?.popViewController(animated: true)
   }
 }

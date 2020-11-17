@@ -19,6 +19,6 @@ extension ObservableConvertibleType where Element == Void {
      - Note: Observable 시퀀스를 Driver로 변환. Element가 Void인 경우에만 사용 가능
     */
     func asDriver() -> Driver<Element> {
-        return self.asDriver(onErrorJustReturn: Void())
+        return asDriver(onErrorJustReturn: Void())
     }
 }

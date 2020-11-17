@@ -50,7 +50,7 @@ open class SearchService: SearchServiceProtocol {
         networking.session.cancelAllRequests()
         return networking.rx.request(.searchCafe(query: searchText, sort: sort.value, page: page))
           .do(onSuccess: { _ in
-              self.defaultAddSearchHistory(searchText)
+              defaultAddSearchHistory(searchText)
           })
           .map(to: SearchResult.self)
           .asObservable()
@@ -71,7 +71,7 @@ open class SearchService: SearchServiceProtocol {
         networking.session.cancelAllRequests()
         return networking.rx.request(.searchBlog(query: searchText, sort: sort.value, page: page))
           .do(onSuccess: { _ in
-              self.defaultAddSearchHistory(searchText)
+              defaultAddSearchHistory(searchText)
           })
           .map(to: SearchResult.self)
           .asObservable()

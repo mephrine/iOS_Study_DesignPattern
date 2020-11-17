@@ -49,17 +49,17 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.setNeedsUpdateConstraints()
+        view.setNeedsUpdateConstraints()
         
         // 자동으로 스크롤뷰 인셋 조정하는 코드 막기
-        self.automaticallyAdjustsScrollViewInsets = false
+        automaticallyAdjustsScrollViewInsets = false
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.setInteractivePopGesture(isViewControllerPopGesture)
+        setInteractivePopGesture(isViewControllerPopGesture)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -73,9 +73,9 @@ class BaseViewController: UIViewController {
     }
     
     override func updateViewConstraints() {
-      if !self.didSetupConstraints {
-        self.constraints()
-        self.didSetupConstraints = true
+      if !didSetupConstraints {
+        constraints()
+        didSetupConstraints = true
       }
         
       super.updateViewConstraints()
@@ -123,12 +123,12 @@ class BaseViewController: UIViewController {
      */
     func setInteractivePopGesture(_ isRegi:Bool = true) {
         if isRegi {
-            self.navigationController?.interactivePopGestureRecognizer?.delegate = self as UIGestureRecognizerDelegate
-            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+            navigationController?.interactivePopGestureRecognizer?.delegate = self as UIGestureRecognizerDelegate
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = true
             isPopGesture = true
         } else {
-            self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+            navigationController?.interactivePopGestureRecognizer?.delegate = nil
+            navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             isPopGesture = false
         }
     }
@@ -149,7 +149,7 @@ class BaseViewController: UIViewController {
             var topPadding = window?.safeAreaInsets.top
             
             if topPadding == 0 {
-                topPadding = self.topLayoutGuide.length
+                topPadding = topLayoutGuide.length
                 if topPadding == 0 {
                     topPadding = UIApplication.shared.statusBarFrame.size.height
                 }

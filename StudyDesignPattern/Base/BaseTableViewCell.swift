@@ -150,7 +150,7 @@ class BaseTableViewCell: UITableViewCell {
       
     initView()
     constraints()
-    self.selectionStyle = .none
+    selectionStyle = .none
   }
   
   required convenience init?(coder: NSCoder) {

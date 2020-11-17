@@ -27,13 +27,13 @@ final class MVVMViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-      self.view.setNeedsUpdateConstraints()
+      view.setNeedsUpdateConstraints()
     }
     
     override func updateViewConstraints() {
-      if !self.didSetupConstraints {
-        self.setupConstraints()
-        self.didSetupConstraints = true
+      if !didSetupConstraints {
+        setupConstraints()
+        didSetupConstraints = true
       }
       super.updateViewConstraints()
     }
@@ -45,6 +45,6 @@ final class MVVMViewController: UIViewController {
     }
     
     private func initView() {
-        self.view.addSubview(titleLabel)
+        view.addSubview(titleLabel)
     }
 }

@@ -64,10 +64,10 @@ final class MainViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
         
-    self.tableView.delegate = self
-    self.tableView.dataSource = self
+    tableView.delegate = self
+    tableView.dataSource = self
         
-    self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
   }
     
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,7 +91,7 @@ final class MainViewController: UITableViewController {
     
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let viewController = viewControllers[indexPath.row].viewController() else { return }
-    self.navigationController?.pushViewController(viewController, animated: true)
+    navigationController?.pushViewController(viewController, animated: true)
   }
 }
 

@@ -18,8 +18,8 @@ fileprivate struct Font {
 
 fileprivate extension UILabel {
     var defaultSetting: UILabel {
-        self.contentMode = .scaleAspectFit
-      self.font = Font.defaultSettingLabelTitle
+        contentMode = .scaleAspectFit
+      font = Font.defaultSettingLabelTitle
         return self
     }
 }
@@ -126,7 +126,7 @@ class BaseDetailViewController: BaseViewController {
     
     // MARK: - UI
     override func initView() {
-      self.view.backgroundColor = .white
+      view.backgroundColor = .white
       
         //navi
         let button = UIButton(frame: CGRect.zero)
@@ -139,10 +139,10 @@ class BaseDetailViewController: BaseViewController {
             $0.width.height.equalTo(40)
         }
         
-        self.navigationItem.leftBarButtonItem = naviItem
+        navigationItem.leftBarButtonItem = naviItem
         
         // ScrollView
-      self.view.addSubview(scrollView)
+      view.addSubview(scrollView)
     }
     
   override func constraints() {

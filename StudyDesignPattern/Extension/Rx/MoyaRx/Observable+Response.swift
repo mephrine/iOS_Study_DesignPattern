@@ -72,6 +72,6 @@ extension ObservableType where Element == ProgressResponse {
      - returns: observable of progress events
      */
     func filterProgress() -> Observable<Double> {
-        return self.filter { !$0.completed }.map { $0.progress }
+        return filter { !$0.completed }.map { $0.progress }
     }
 }

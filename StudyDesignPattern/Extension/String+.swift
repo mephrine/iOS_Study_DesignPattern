@@ -16,7 +16,7 @@ extension String {
     }
     
     var trimSide: String {
-        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     private func toDate(_ format: String = "yyyy-MM-dd'T'hh:mm:ss'.000'xxx") -> Date {
@@ -27,16 +27,16 @@ extension String {
     }
     
     func toDateKr(format: String = "yyyy-MM-dd'T'hh:mm:ss'.000'xxx") -> String {
-        return self.toDate().dateToString(format: "yyyy년 MM월 dd일 a HH시 mm분")
+        return toDate().dateToString(format: "yyyy년 MM월 dd일 a HH시 mm분")
     }
     
     func toNearDateStr(format: String = "yyyy-MM-dd'T'hh:mm:ss'.000'xxx") -> String {
-        return self.toDate().dayDifference
+        return toDate().dayDifference
     }
     
     func htmlAttributedString(font: UIFont) -> NSAttributedString? {
         
-        guard let data = self.data(using: String.Encoding.utf16, allowLossyConversion: false) else {
+        guard let data = data(using: String.Encoding.utf16, allowLossyConversion: false) else {
             return nil
         }
 

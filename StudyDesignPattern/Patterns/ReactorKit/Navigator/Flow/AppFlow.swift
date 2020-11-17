@@ -21,7 +21,7 @@ import SafariServices
  */
 class AppFlow: Flow {
     var root: Presentable {
-        return self.rootViewController
+        return rootViewController
     }
     
     private lazy var rootViewController: UINavigationController = {
@@ -59,7 +59,7 @@ class AppFlow: Flow {
     private func goSearchList() -> FlowContributors {
       let reactor = AppDependency.resolve().reactorKitListReactor
         let searchVC = ReactorKitListViewController(reactor: reactor)
-        self.rootViewController.setViewControllers([searchVC], animated: false)
+        rootViewController.setViewControllers([searchVC], animated: false)
 
         return .one(flowContributor: FlowContributor.contribute(withNextPresentable: searchVC, withNextStepper: reactor))
     }
@@ -71,13 +71,13 @@ class AppFlow: Flow {
         detail.title = model.name
         rootViewController.setNavigationBarHidden(false, animated: true)
 
-        self.rootViewController.pushViewController(detail, animated: true)
+        rootViewController.pushViewController(detail, animated: true)
 
         return .one(flowContributor: FlowContributor.contribute(withNextPresentable: detail, withNextStepper: reatctor))
     }
 
     private func returnDetailToList(row: Int) -> FlowContributors {
-        if let searchList = self.rootViewController.viewControllers.last as? ReactorKitListViewController {
+        if let searchList = rootViewController.viewControllers.last as? ReactorKitListViewController {
             searchList.reactor?.action.onNext(.readWebpage(index: row))
         }
         return .none
@@ -95,7 +95,7 @@ class AppStepper: Stepper {
     private let appService: AppService
     
     init(withService service: AppService) {
-        self.appService = service
+        appService = service
     }
     
     var initialStep: Step {

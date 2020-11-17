@@ -168,7 +168,7 @@ final class ReactorKitListReactor: Reactor, Stepper {
             }
         // 더 불러오기
         case .loadMore:
-            self.isLoading.onNext(true)
+            isLoading.onNext(true)
 
             if currentState.filterState == .blog {
                 return service.searchService.searchBlog(searchText: currentState.searchText, sort: currentState.sortState, page: currentState.page)
@@ -334,12 +334,12 @@ final class ReactorKitListReactor: Reactor, Stepper {
             newState.isEnd = isEnd
         // 더 불러온 데이터 - cafe, blog 단일
         case .loadMore(let list):
-            self.isLoading.onNext(false)
+            isLoading.onNext(false)
             newState.resultList.append(contentsOf: [SearchTableViewSection(items: list.items ?? [])])
             newState.page += 1
         // 더 불러온 데이터 - ALL
         case .loadMoreAll(let list):
-            self.isLoading.onNext(false)
+            isLoading.onNext(false)
             if let list1 = list.items, let list2 = currentState.blogList?.items {
                 var sortedList: [SearchItem]
                 if state.sortState == .accuracy {

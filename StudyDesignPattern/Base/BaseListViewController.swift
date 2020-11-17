@@ -232,10 +232,10 @@ class BaseListViewController: BaseViewController {
     
     lazy var sortActionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet).then {
         $0.addAction(UIAlertAction(title: SearchSort.accuracy.rawValue, style: .default, handler: { result in
-            self.selectActionSort(selected: SearchSort.accuracy)
+            selectActionSort(selected: SearchSort.accuracy)
         }))
         $0.addAction(UIAlertAction(title: SearchSort.recency.rawValue, style: .default, handler: { result in
-            self.selectActionSort(selected: SearchSort.recency)
+            selectActionSort(selected: SearchSort.recency)
         }))
         
         $0.addAction(UIAlertAction(title: "STR_CANCEL".localized, style: .cancel, handler: nil))
@@ -277,7 +277,7 @@ class BaseListViewController: BaseViewController {
     
     lazy var loadingView =  UIActivityIndicatorView(style: .gray).then {
       $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.frame = CGRect(x: 0, y: 0, width: self.searchTableView.bounds.width, height: 44)
+        $0.frame = CGRect(x: 0, y: 0, width: searchTableView.bounds.width, height: 44)
     }
     
     // MARK: - Override Fucntion
@@ -291,39 +291,39 @@ class BaseListViewController: BaseViewController {
     */
     //MARK: - UI
     override func initView() {
-      self.view.backgroundColor = .white
+      view.backgroundColor = .white
         // search Bar
-        self.view.addSubview(self.searchBar)
-        self.view.addSubview(self.searchButton)
+        view.addSubview(searchBar)
+        view.addSubview(searchButton)
         //navi
 //        let searchButtonItem = UIBarButtonItem.init(customView: self.searchButton)
-//        self.navigationItem.rightBarButtonItem = searchButtonItem
+//        navigationItem.rightBarButtonItem = searchButtonItem
 //
-//        let searchBarItem = UIBarButtonItem.init(customView: self.searchBar)
-//        self.navigationItem.leftBarButtonItem = searchBarItem
+//        let searchBarItem = UIBarButtonItem.init(customView: searchBar)
+//        navigationItem.leftBarButtonItem = searchBarItem
         
         
         // tableView
-        self.view.addSubview(self.searchTableView)
+        view.addSubview(searchTableView)
         
         // tablewView HeaderView
-        self.searchTableView.addSubview(self.headerView)
-        self.searchTableView.tableHeaderView = self.headerView
-        self.headerView.addSubview(self.filterButton)
-        self.headerView.addSubview(self.sortButton)
-        self.headerView.addSubview(self.headerBottomLineView)
+        searchTableView.addSubview(headerView)
+        searchTableView.tableHeaderView = headerView
+        headerView.addSubview(filterButton)
+        headerView.addSubview(sortButton)
+        headerView.addSubview(headerBottomLineView)
         
         // noData View
-        self.view.addSubview(self.noDataView)
-        self.noDataView.addSubview(self.noDataLabel)
+        view.addSubview(noDataView)
+        noDataView.addSubview(noDataLabel)
         
         // Gesture
         let tapSortGesture = UITapGestureRecognizer(target: self, action: #selector(showSortActionSheet))
-        self.sortButton.addGestureRecognizer(tapSortGesture)
+        sortButton.addGestureRecognizer(tapSortGesture)
         
         // 필터뷰 버튼 클릭
         let tapFilterGesture = UITapGestureRecognizer(target: self, action: #selector(showFilterView))
-        self.filterButton.addGestureRecognizer(tapFilterGesture)
+        filterButton.addGestureRecognizer(tapFilterGesture)
       
       Async.main(after: 0.6) { [weak self] in
         self?.searchBar.becomeFirstResponder()
@@ -340,80 +340,74 @@ class BaseListViewController: BaseViewController {
      */
     override func constraints() {
         // search Bar
-        self.searchBar.snp.makeConstraints { [weak self] in
-            guard let self = self else { return }
+        searchBar.snp.makeConstraints {
             if #available(iOS 11.0, *) {
-                $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+                $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             } else {
-                $0.top.equalTo(self.topLayoutGuide.snp.bottom)
+                $0.top.equalTo(topLayoutGuide.snp.bottom)
             }
             $0.left.equalToSuperview()
-            $0.height.equalTo(self.searchBar.bounds.height)
+            $0.height.equalTo(searchBar.bounds.height)
         }
 
-        self.searchButton.snp.makeConstraints { [weak self] in
-            guard let self = self else { return }
-            $0.centerY.equalTo(self.searchBar.snp.centerY)
-            $0.left.equalTo(self.searchBar.snp.right)
+        searchButton.snp.makeConstraints {
+            $0.centerY.equalTo(searchBar.snp.centerY)
+            $0.left.equalTo(searchBar.snp.right)
             $0.right.equalToSuperview().offset(-10)
         }
         
         // tableView
-        self.searchTableView.snp.makeConstraints{ [weak self] in
-            guard let self = self else { return }
+        searchTableView.snp.makeConstraints{
             $0.left.right.bottom.equalToSuperview()
-            $0.top.equalTo(self.searchBar.snp.bottom)
+            $0.top.equalTo(searchBar.snp.bottom)
         }
         
         
-        self.headerView.snp.makeConstraints {
+        headerView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.height.equalTo(40)
         }
         // tablewView HeaderView
-        self.filterButton.snp.makeConstraints { [weak self] in
-            guard let self = self else { return }
+        filterButton.snp.makeConstraints {
             $0.left.top.bottom.equalToSuperview()
-            $0.right.equalTo(self.sortButton.snp.left).offset(-10)
+            $0.right.equalTo(sortButton.snp.left).offset(-10)
         }
-        self.filterButton.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 749), for: .horizontal)
-        self.filterButton.setContentHuggingPriority(UILayoutPriority(rawValue: 249), for: .horizontal)
+        filterButton.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 749), for: .horizontal)
+        filterButton.setContentHuggingPriority(UILayoutPriority(rawValue: 249), for: .horizontal)
         
-        self.sortButton.snp.makeConstraints { [weak self] in
-            guard let self = self else { return }
+        sortButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.right.equalToSuperview().offset(-10)
-            $0.width.height.equalTo(self.headerView.snp.height)
+            $0.width.height.equalTo(headerView.snp.height)
         }
-        //        self.sortButton.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 751), for: .horizontal)
-        //        self.sortButton.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
+        //        sortButton.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 751), for: .horizontal)
+        //        sortButton.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
         
-        self.headerBottomLineView.snp.makeConstraints {
+        headerBottomLineView.snp.makeConstraints {
             $0.left.bottom.right.equalToSuperview()
             $0.height.equalTo(1)
         }
         
         // noData View
-        self.noDataLabel.snp.makeConstraints {
+        noDataLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             $0.centerY.equalToSuperview().offset(-40)
         }
         
-        self.noDataView.snp.makeConstraints { [weak self] in
-            guard let self = self else { return }
-            $0.left.equalTo(self.searchTableView.snp.left)
-            $0.right.equalTo(self.searchTableView.snp.right)
-            $0.bottom.equalTo(self.searchTableView.snp.bottom)
-            $0.top.equalTo(self.searchTableView.snp.top)
+        noDataView.snp.makeConstraints {
+            $0.left.equalTo(searchTableView.snp.left)
+            $0.right.equalTo(searchTableView.snp.right)
+            $0.bottom.equalTo(searchTableView.snp.bottom)
+            $0.top.equalTo(searchTableView.snp.top)
         }
         
         // history View
-        self.historyView.addSubview(self.historyTableView)
-        self.historyView.snp.makeConstraints {
+        historyView.addSubview(historyTableView)
+        historyView.snp.makeConstraints {
             $0.height.lessThanOrEqualTo(125)
         }
-        self.historyTableView.snp.makeConstraints {
+        historyTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
@@ -429,32 +423,32 @@ class BaseListViewController: BaseViewController {
   func manageHistoryView(_ isShowing: Bool) {
       if isShowing {
           var isExist = false
-          for view in self.view.subviews {
-              if view == self.historyView {
+          for view in view.subviews {
+              if view == historyView {
                   isExist = true
                   return
               }
           }
           if !isExist {
-              self.view.addSubview(self.historyView)
-              self.historyView.snp.makeConstraints { [weak self] in
+              view.addSubview(historyView)
+              historyView.snp.makeConstraints { [weak self] in
                   guard let self = self else { return }
-                  $0.top.equalTo(self.searchBar.snp.bottom)
+                  $0.top.equalTo(searchBar.snp.bottom)
                   $0.left.right.equalToSuperview()
                   $0.height.lessThanOrEqualTo(250)
               }
           }
           
-          self.historyView.alpha = 0
-          self.view.layoutIfNeeded()
+          historyView.alpha = 0
+          view.layoutIfNeeded()
           
           UIView.animate(withDuration: 0.3) {
-              self.historyView.alpha = 1
+              historyView.alpha = 1
           }
           
       } else {
           UIView.animate(withDuration: 0.3, animations: {
-              self.historyView.alpha = 0
+              historyView.alpha = 0
           })
       }
   }
@@ -470,13 +464,12 @@ class BaseListViewController: BaseViewController {
      */
     func manageFilterView(_ isShowing: Bool = true) {
         if isShowing {
-            self.searchTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            searchTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             Async.main(after: 0.3) { [weak self] in
                 guard let self = self else { return }
                 self.searchTableView.addGestureRecognizer(self.touchSuperViewGesture)
                 self.view.addSubview(self.filterStackView)
-                self.filterStackView.snp.makeConstraints { [weak self] in
-                    guard let self = self else { return }
+                self.filterStackView.snp.makeConstraints {
                     $0.top.equalTo(self.searchBar.snp.bottom).offset(self.filterButton.bounds.height)
                     $0.left.right.equalToSuperview()
                     $0.height.height.lessThanOrEqualTo(250)
@@ -490,13 +483,13 @@ class BaseListViewController: BaseViewController {
             }
             
         } else {
-            self.searchTableView.removeGestureRecognizer(self.touchSuperViewGesture)
+            searchTableView.removeGestureRecognizer(touchSuperViewGesture)
             
-            UIView.animate(withDuration: 0.3, animations: {
-                self.filterStackView.alpha = 0
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                self?.filterStackView.alpha = 0
             }) { completion in
-                self.filterStackView.snp.removeConstraints()
-                self.filterStackView.removeFromSuperview()
+                filterStackView.snp.removeConstraints()
+                filterStackView.removeFromSuperview()
             }
         }
     }
@@ -514,15 +507,15 @@ class BaseListViewController: BaseViewController {
 extension BaseListViewController {
     // MARK: - Action
     @objc func hideFilterView() {
-        self.manageFilterView(false)
+        manageFilterView(false)
     }
     
     @objc func showFilterView() {
-        self.manageFilterView(true)
+        manageFilterView(true)
     }
     
     @objc func showSortActionSheet() {
-        self.present(sortActionSheet, animated: true, completion: nil)
+        present(sortActionSheet, animated: true, completion: nil)
     }
     
     @objc func selectFilterView(_ gesture: UITapGestureRecognizer) {
@@ -532,9 +525,9 @@ extension BaseListViewController {
               let selectedFilter = SearchFilter(rawValue: selectedText) else { return }
       
       // 필터 스택 뷰
-      if let filterButton1 = self.filterStackView.arrangedSubviews.filter({ $0.tag == 901 }).first as? UIButton,
-          let filterButton2 = self.filterStackView.arrangedSubviews.filter({ $0.tag == 902 }).first as? UIButton {
-        self.filterButton.setTitle(selectedFilter.desc, for: .normal)
+      if let filterButton1 = filterStackView.arrangedSubviews.filter({ $0.tag == 901 }).first as? UIButton,
+          let filterButton2 = filterStackView.arrangedSubviews.filter({ $0.tag == 902 }).first as? UIButton {
+        filterButton.setTitle(selectedFilter.desc, for: .normal)
         switch selectedFilter {
         case .all:
             filterButton1.setTitle(SearchFilter.blog.desc, for: .normal)

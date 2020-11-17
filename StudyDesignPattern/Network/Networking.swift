@@ -31,7 +31,7 @@ final class NetworkingAPI<Target: TargetType>: CustomProvider<Target> {
     */
     func request(_ target: Target) -> Single<Response> {
         let requestString = "\(target.method.rawValue) \(target.path)"
-        return self.rx.request(target)
+        return rx.request(target)
             .filterSuccessfulStatusCodes()
             .do(
                 onSuccess: { value in

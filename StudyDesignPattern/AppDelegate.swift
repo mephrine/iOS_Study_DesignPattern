@@ -15,31 +15,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   // MARK: - DI
   private override init() {
-    self.dependency = AppDependency.resolve()
+    dependency = AppDependency.resolve()
     super.init()
   }
   
   init(dependency: AppDependency) {
-    self.dependency = dependency
+    dependency = dependency
     super.init()
   }
 
   // MARK: - App Lifecycle
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
-    self.window = UIWindow(frame: UIScreen.main.bounds)
+    window = UIWindow(frame: UIScreen.main.bounds)
         
     if #available(iOS 13.0, *) {
       window?.overrideUserInterfaceStyle = .light
     }
         
-    self.window?.backgroundColor = .white
+    window?.backgroundColor = .white
         
         
     let navigationController = UINavigationController(rootViewController: MainViewController())
     
-    self.window?.rootViewController = navigationController
-    self.window?.makeKeyAndVisible()
+    window?.rootViewController = navigationController
+    window?.makeKeyAndVisible()
         
     return true
   }
