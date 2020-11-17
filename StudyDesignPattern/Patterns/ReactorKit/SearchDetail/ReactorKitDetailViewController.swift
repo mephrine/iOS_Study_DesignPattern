@@ -35,40 +35,47 @@ final class ReactorKitDetailViewController: BaseDetailViewController, View {
         
     }
 
-    // MARK: - Bind
-    func bind(reactor: ReactorKitDetailReactor) {
-        // Action
-        Observable.just(Reactor.Action.loadView)
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
+  // MARK: - Bind
+  func bind(reactor: ReactorKitDetailReactor) {
+    bindAction(reactor: reactor)
+    bindState(reactor: reactor)
+  }
+  
+  private func bindAction(reactor: ReactorKitDetailReactor) {
+    // Action
+    Observable.just(Reactor.Action.loadView)
+        .bind(to: reactor.action)
+        .disposed(by: disposeBag)
+  }
+  
+  private func bindState(reactor: ReactorKitDetailReactor) {
+    // State
+    reactor.state.map{ $0.thumbnailURL }
+        .filterNil()
+        .subscribe(onNext: { [weak self] in
+            self?.thumnailView.kf.setImage(with: $0, placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.3))])
+        }).disposed(by: disposeBag)
 
-        // State
-        reactor.state.map{ $0.thumbnailURL }
-            .filterNil()
-            .subscribe(onNext: { [weak self] in
-                self?.thumnailView.kf.setImage(with: $0, placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.3))])
-            }).disposed(by: disposeBag)
+    reactor.state.map{ $0.name }
+        .bind(to: nameLabel.rx.text)
+        .disposed(by: disposeBag)
 
-        reactor.state.map{ $0.name }
-            .bind(to: nameLabel.rx.text)
-            .disposed(by: disposeBag)
+    reactor.state.map{ $0.title }
+        .bind(to: titleLabel.rx.attributedText)
+        .disposed(by: disposeBag)
 
-        reactor.state.map{ $0.title }
-            .bind(to: titleLabel.rx.attributedText)
-            .disposed(by: disposeBag)
+    reactor.state.map{ $0.contents }
+        .bind(to: contentsLabel.rx.attributedText)
+        .disposed(by: disposeBag)
 
-        reactor.state.map{ $0.contents }
-            .bind(to: contentsLabel.rx.attributedText)
-            .disposed(by: disposeBag)
+    reactor.state.map{ $0.dateTime }
+        .bind(to: dateTimeLabel.rx.text)
+        .disposed(by: disposeBag)
 
-        reactor.state.map{ $0.dateTime }
-            .bind(to: dateTimeLabel.rx.text)
-            .disposed(by: disposeBag)
-
-        reactor.state.map{ $0.url }
-            .bind(to: urlLabel.rx.text)
-            .disposed(by: disposeBag)
-    }
+    reactor.state.map{ $0.url }
+        .bind(to: urlLabel.rx.text)
+        .disposed(by: disposeBag)
+  }
 
     // MARK: - Action
     @IBAction func tapMoveURL(_ sender: Any) {
