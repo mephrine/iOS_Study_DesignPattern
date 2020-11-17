@@ -463,7 +463,6 @@ final class ReactorKitListReactor: Reactor, Stepper {
                 continue
             } else {
                 compared = arr1[idx] > arr2[idx]
-                break
             }
         }
         return compared
@@ -490,7 +489,6 @@ final class ReactorKitListReactor: Reactor, Stepper {
                 continue
             } else {
                 compared = arr1[idx] > arr2[idx]
-                break
             }
         }
         return compared
@@ -575,7 +573,6 @@ final class ReactorKitListReactor: Reactor, Stepper {
         for (i, item) in (currentState.resultList.first?.items ?? []).enumerated() {
             if (item.url ?? "") == (selected.url ?? "") {
                 index = i
-                break
             }
         }
         steps.accept(AppStep.goSearchDetail(model: selected, row: index))

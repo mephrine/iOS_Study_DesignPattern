@@ -141,15 +141,12 @@ final class ReactorKitListViewController: BaseListViewController, View {
                 case .all:
                     filterButton1.setTitle(SearchFilter.blog.desc, for: .normal)
                     filterButton2.setTitle(SearchFilter.cafe.desc, for: .normal)
-                    break
                 case .blog:
                     filterButton1.setTitle(SearchFilter.all.desc, for: .normal)
                     filterButton2.setTitle(SearchFilter.cafe.desc, for: .normal)
-                    break
                 case .cafe:
                     filterButton1.setTitle(SearchFilter.all.desc, for: .normal)
                     filterButton2.setTitle(SearchFilter.blog.desc, for: .normal)
-                    break
                 }
             })
             .disposed(by: disposeBag)

@@ -193,16 +193,12 @@ extension BaseViewController: UIGestureRecognizerDelegate {
         switch gestureRecognizer.state {
         case .possible:
             isPopSwipe = true
-            break
         case .began:
             isPopSwipe = true
-            break
         case .changed:
             isPopSwipe = true
-            break
         default:
             isPopSwipe = false
-            break
         }
         return true
     }

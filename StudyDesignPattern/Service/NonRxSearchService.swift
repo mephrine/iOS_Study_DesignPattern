@@ -50,10 +50,8 @@ open class NonRxSearchService: NonRxSearchServiceProtocol {
             let data = moyaResponse.data.decode(SearchResult.self)
             completion(data, nil)
           }
-          break;
         case let .failure(error):
           completion(nil, error)
-          break;
       }
     }
   }
@@ -80,10 +78,8 @@ open class NonRxSearchService: NonRxSearchServiceProtocol {
             let data = moyaResponse.data.decode(SearchResult.self)
             completion(data, nil)
           }
-          break;
         case let .failure(error):
           completion(nil, error)
-          break;
       }
     }
   }

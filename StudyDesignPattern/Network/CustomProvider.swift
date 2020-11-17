@@ -61,10 +61,8 @@ extension Reactive where Base: CustomProvider<CallAPI> {
                 switch result {
                 case let .success(response):
                     single(.success(response))
-                    break
                 case let .failure(error):
                     single(.error(error))
-                    break
                 }
             }
             return Disposables.create {

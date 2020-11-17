@@ -214,7 +214,6 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
               continue
           } else {
               compared = arr1[idx] > arr2[idx]
-              break
           }
       }
       return compared
@@ -241,7 +240,6 @@ final class MVCListViewController: BaseListViewController, SelectSortProtocol {
         continue
       } else {
         compared = arr1[idx] > arr2[idx]
-        break
       }
     }
     return compared
