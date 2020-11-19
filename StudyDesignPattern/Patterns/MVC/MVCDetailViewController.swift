@@ -50,8 +50,9 @@ class MVCDetailViewController: BaseDetailViewController {
     navigationController?.popViewController(animated: true)
   }
   
-  private func clickURL(urlString: String) {
-    if let url = URL(string: urlString) {
+  override func clickURL() {
+    if let urlString = model.url,
+       let url = URL(string: urlString) {
       isSelected = true
       present(SFSafariViewController(url: url), animated: true, completion: nil)
     }

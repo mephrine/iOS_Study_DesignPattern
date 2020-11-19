@@ -25,6 +25,10 @@ fileprivate extension UILabel {
 }
 
 class BaseDetailViewController: BaseViewController {
+  fileprivate struct Color {
+    static let urlLabelTextColor = UIColor(hex: 0x0395FF)
+  }
+  
     // MARK: - Variable
     let thumnailView = UIImageView(frame: .zero).then {
       $0.translatesAutoresizingMaskIntoConstraints = false
@@ -53,8 +57,9 @@ class BaseDetailViewController: BaseViewController {
     }
     let urlLabel = UILabel(frame: .zero).then {
       $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.defaultSetting
-            .numberOfLines = 2
+      $0.defaultSetting.numberOfLines = 2
+      $0.textColor = Color.urlLabelTextColor
+      $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToOpenBrowser)))
     }
     
   lazy var contentView = UIView(frame: .zero).then {
@@ -120,28 +125,27 @@ class BaseDetailViewController: BaseViewController {
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+      super.viewDidLoad()
     }
     
     // MARK: - UI
     override func initView() {
       view.backgroundColor = .white
       
-        //navi
-        let button = UIButton(frame: CGRect.zero)
-        button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        button.setImage(UIImage(named: "navi_back"), for: .normal)
-        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 27)
-                
-        let naviItem = UIBarButtonItem.init(customView: button)
-        naviItem.customView?.snp.makeConstraints{
-            $0.width.height.equalTo(40)
-        }
+      //navi
+      let button = UIButton(frame: CGRect.zero)
+      button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+      button.setImage(UIImage(named: "navi_back"), for: .normal)
+      button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 27)
+              
+      let naviItem = UIBarButtonItem.init(customView: button)
+      naviItem.customView?.snp.makeConstraints{
+        $0.width.height.equalTo(40)
+      }
         
-        navigationItem.leftBarButtonItem = naviItem
+      navigationItem.leftBarButtonItem = naviItem
         
-        // ScrollView
+      // ScrollView
       view.addSubview(scrollView)
     }
     
@@ -150,16 +154,24 @@ class BaseDetailViewController: BaseViewController {
       $0.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
       $0.left.bottom.right.equalToSuperview()
     }
-    
-    
   }
     
-    // MARK: - Click
-    @objc private func goBack() {
-        clickToBackButton()
-    }
-    
-    func clickToBackButton() {
+  // MARK: - Click
+  @objc private func goBack() {
+    clickToBackButton()
+  }
+  
+  @objc private func goToOpenBrowser() {
+    clickURL()
+  }
+  
+  
+  // MARK: - Abstract
+  func clickToBackButton() {
         
-    }
+  }
+  
+  func clickURL() {
+    
+  }
 }
