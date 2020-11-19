@@ -55,11 +55,14 @@ class BaseDetailViewController: BaseViewController {
         $0.defaultSetting
             .numberOfLines = 1
     }
-    let urlLabel = UILabel(frame: .zero).then {
+    lazy var urlLabel = UILabel(frame: .zero).then {
       $0.translatesAutoresizingMaskIntoConstraints = false
       $0.defaultSetting.numberOfLines = 2
       $0.textColor = Color.urlLabelTextColor
-      $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToOpenBrowser)))
+      
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToOpenBrowser))
+      $0.isUserInteractionEnabled = true
+      $0.addGestureRecognizer(tapGesture)
     }
     
   lazy var contentView = UIView(frame: .zero).then {
@@ -147,6 +150,9 @@ class BaseDetailViewController: BaseViewController {
         
       // ScrollView
       view.addSubview(scrollView)
+      
+      
+      
     }
     
   override func constraints() {
@@ -165,8 +171,6 @@ class BaseDetailViewController: BaseViewController {
     clickURL()
   }
   
-  
-  // MARK: - Abstract
   func clickToBackButton() {
         
   }
