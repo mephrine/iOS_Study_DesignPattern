@@ -1,0 +1,19 @@
+/*
+  Localizable.strings
+  StudyDesignPattern
+
+  Created by Mephrine on 2020/11/01.
+  
+*/
+
+// MARK: - Button
+"BTN_SEARCH_BUTTON"                        = "검색";
+"BTN_CANCEL"                               = "취소";
+"BTN_OK"                                   = "확인";
+
+// MARK: - PlaceHolder
+"SEARCH_PLACE_HOLDER"                      = "검색어를 입력해주세요.";
+
+// MARK: - e.g.
+"SEARCH_NO_DATA"                           = "검색 결과가 없습니다.";
+"SEARCH_NO_INPUT"                          = "찾고싶은 내용을 검색해주세요.";

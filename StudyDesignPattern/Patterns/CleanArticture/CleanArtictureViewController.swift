@@ -1,0 +1,49 @@
+//
+//  CleanArtictureViewController.swift
+//  StudyDesignPattern
+//
+//  Created by Mephrine on 2020/10/25.
+//
+
+import UIKit
+
+final class CleanArtictureViewController: UIViewController {
+    private lazy var className : String = {
+        return String(describing: type(of: self))
+    }()
+    
+    private(set) var didSetupConstraints = false
+    
+    private lazy var titleLabel = UILabel(frame: .zero).then {
+        $0.text = className
+        $0.textColor = .black
+       
+    }
+    
+    override func loadView() {
+        super.loadView()
+        initView()
+    }
+    
+    override func viewDidLoad() {
+      view.setNeedsUpdateConstraints()
+    }
+    
+    override func updateViewConstraints() {
+      if !didSetupConstraints {
+        setupConstraints()
+        didSetupConstraints = true
+      }
+      super.updateViewConstraints()
+    }
+    
+    private func setupConstraints() {
+        titleLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
+    
+    private func initView() {
+        view.addSubview(titleLabel)
+    }
+}

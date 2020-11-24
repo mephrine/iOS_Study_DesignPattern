@@ -13,6 +13,7 @@ target 'StudyDesignPattern' do
   pod  "RxOptional"
   pod  "RxViewController"
   pod  "RxAnimated"
+  pod  "RxKeyboard"
   
   #UI
   pod  "SnapKit"
@@ -20,7 +21,7 @@ target 'StudyDesignPattern' do
   pod  "Kingfisher"
 
   #DI
-  pod 'Swinject'
+  pod 'Pure'
 
   #Lint
   pod 'SwiftLint'
@@ -29,7 +30,13 @@ target 'StudyDesignPattern' do
   pod  'Moya'
   
   ## Parsing
-  pod  'SwiftyJSON'
+#  pod  'SwiftyJSON'
+
+  # Lint
+  pod 'SwiftLint'
+  
+  #DI
+  pod 'Pure'
   
   # Misc.
   pod "Then"
@@ -46,6 +53,7 @@ target 'StudyDesignPattern' do
     pod 'Nimble'
     pod 'RxTest'
     pod 'RxBlocking'
+    pod 'Stubber'
   end
   
 end
